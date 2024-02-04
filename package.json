@@ -1,0 +1,28 @@
+{
+    "name": "reflexio-kit",
+    "private": true,
+    "description": "Business flow manager, more than just state manager",
+    "scripts": {},
+    "workspaces": [
+      "packages/*"
+    ],
+    "author": "Konstantin Astapov",
+    "license": "MIT",
+    "readme": "README.md",
+    "repository": {
+      "type": "git",
+      "url": "git+ssh://git@github.com/reflexio/reflexio.git"
+    },
+    "keywords": [
+      "reflexio"
+    ],
+    "devDependencies": {
+      "@reflexio/core-v1": "^1.1.0",
+      "@reflexio/react-v1": "^1.1.5",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "redux": "^4.2.1",
+      "uuid": "^8.3.2"
+    }
+  }
+  
