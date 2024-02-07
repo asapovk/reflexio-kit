@@ -1,16 +1,14 @@
 import {
-  DefautOpts,
   DispatcherType,
   HookerType,
   WaiterType,
 } from '@reflexio/core-v1/lib/types';
 
-interface Opts<Tg, St, CtxState> {
+interface Opts<Tg, St> {
   trigger: DispatcherType<Tg>;
   wait: WaiterType<Tg>;
   hook: HookerType<Tg>;
   getCurrentState: () => St;
-  getCtx: () => CtxState;
 }
 
 export interface Stage<O> {
@@ -48,15 +46,15 @@ export interface IStagingInitArgs<Opts> {
   failHandler: (opt: Opts) => Promise<void> | void;
 }
 
-export interface IStagingTriggers<Tg, St, CtxState> {
-  init: IStagingInitArgs<Opts<Tg, St, CtxState>>;
+export interface IStagingTriggers<Tg, St> {
+  init: IStagingInitArgs<Opts<Tg, St>>;
   addRoute: {
     route: string;
-    stages: Array<Stage<Opts<Tg, St, CtxState>>>;
+    stages: Array<Stage<Opts<Tg, St>>>;
   };
   go: string;
-  saveCtx: { name: string; value: any };
-  dropCtx: { name: string } | null;
+  setCtx: unknown;
+  dropCtx: null;
   lockCurrentStage: null;
   unlockCurrentStage: null;
   setCurrentStage: string; //hidden

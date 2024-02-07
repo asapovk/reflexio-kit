@@ -7,15 +7,8 @@ export class StagingScript {
 
   init(payload) {
     if (!this.isInit) {
-      const biteName = this.opts.biteName;
-      const sliceName = this.opts.sliceName;
-      const stagerOpts = {
-        ...this.opts,
-        getCtx: () => this.opts.getCurrentState()[sliceName][biteName],
-      };
-
       this.stager = new StageProcessor({
-        opt: stagerOpts,
+        opt: this.opts,
         failHandler: payload.failHandler,
         routes: payload.routes,
       });
