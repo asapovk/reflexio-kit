@@ -34,10 +34,10 @@ export interface Stage<O> {
   //Does operations itselfs or/and asks for user actions;
 }
 
-export interface StageProcessorOpts<Tg, St, CtxState> {
-  opt: Opts<Tg, St, CtxState>;
+export interface StageProcessorOpts<Opts> {
+  opt: Opts;
   routes: any;
-  failHandler: (opt: Opts<Tg, St, CtxState>) => Promise<void> | void;
+  failHandler: (opt: Opts) => Promise<void> | void;
 }
 
 export interface IStagingInitArgs<Opts> {

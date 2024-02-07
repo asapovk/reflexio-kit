@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+import { Stage, StageProcessorOpts } from './types';
+
 /*
  ** Processing route path of direct linking
  ** route to be splited into queue of stages; line /users/create_user => to ['users', 'create_user']
@@ -9,38 +12,11 @@
  ** until queue is empty
  */
 
-//setSestination
+//setDestination
 //validate and split to stages => setUp queue
 // compare queues next and cur => relive changing part
 // disassemble current queue within changing part
 // assemble new within changing part
-
-export interface Stage<O> {
-  name: string;
-  validator?: (
-    opt: O,
-    path: { paramVals: Array<string>; pathTemplate: string } | null
-  ) => boolean; //check if route state allowed
-  notValidHandler?: (
-    opt: O,
-    path: { paramVals: Array<string>; pathTemplate: string } | null
-  ) => Promise<boolean> | boolean; //works if not valid
-  assemble?: (
-    opt: O,
-    path: { paramVals: Array<string>; pathTemplate: string } | null
-  ) => Promise<void> | void; //works if valid
-  disassemble?: (
-    opt: O,
-    path: { paramVals: Array<string>; pathTemplate: string } | null
-  ) => void; //works when off the stage
-  //Does operations itselfs or/and asks for user actions;
-}
-
-export interface StageProcessorOpts<O> {
-  opt: O;
-  routes: any;
-  failHandler: (opt: O) => Promise<void> | void;
-}
 
 export class StageProcessor<O> {
   private prevStagesQueue: Array<Stage<O>> = [];
