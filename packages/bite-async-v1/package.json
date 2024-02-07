@@ -1,7 +1,7 @@
 {
-    "name": "@reflexio/bite-routing-v1",
+    "name": "@reflexio/bite-async-v1",
     "version": "1.0.0_alpha",
-    "description": "Reflexio bite-routing-v1 package",
+    "description": "Reflexio bite-async-v1 package",
     "files": ["lib", "index.d.ts", "readme.md"],
     "keywords": ["react", "redux"],
     "repository": "github:reflexio/reflexio-on-redux",
