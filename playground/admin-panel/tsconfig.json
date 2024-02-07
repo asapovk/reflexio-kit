@@ -11,21 +11,24 @@
         "es2017",
         "dom",
       ],
-      "baseUrl": "./packages",
+      "baseUrl": ".",
       "sourceMap": true,
       "module": "esnext",
       "moduleResolution": "node",
       "skipLibCheck": true,
       "allowJs": true,
-      "jsx": "react",
       "allowSyntheticDefaultImports": true,
       "downlevelIteration": true,
       "resolveJsonModule": true,
       "esModuleInterop": true,
      "experimentalDecorators": true,
-    },
-    "exclude": [
-      "node_modules",
-      "build",
-    ],
-  }
+      },
+      "include": [
+        "../../packages/**/*.ts",
+        "../../playground/**/*.ts",
+      ],
+      "exclude": [
+        "node_modules",
+        "build",
+      ],
+    }
