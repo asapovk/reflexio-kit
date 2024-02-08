@@ -4,7 +4,7 @@ import {
   WaiterType,
 } from '@reflexio/core-v1/lib/types';
 
-interface Opts<Tg, St> {
+export interface Opts<Tg, St> {
   trigger: DispatcherType<Tg>;
   wait: WaiterType<Tg>;
   hook: HookerType<Tg>;

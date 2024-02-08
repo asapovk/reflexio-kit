@@ -119,7 +119,7 @@ export class RoutingScript {
     const goBackEvent = this.opts.catchStatus('goBack', args);
     if (goBackEvent.isCatched) {
       const prevLocation =
-        this.opts.getCurrentState().commonApp.router.prevLocation;
+        this.opts.getCurrentState()[this.sliceName][this.biteName]?.prevLocation;
       if (prevLocation) {
         this.opts.setStatus('goTo', prevLocation);
       }
@@ -143,7 +143,7 @@ export class RoutingScript {
 
     const goToDestinationEvent = this.opts.catchStatus('goToDestination', args);
     if (goToDestinationEvent.isCatched) {
-      const routerState = this.opts.getCurrentState().commonApp.router;
+      const routerState = this.opts.getCurrentState()[this.sliceName][this.biteName];
       if (this.preventedDest) {
         window.history.pushState({}, '', this.preventedDest);
         this.preventedDest = null;

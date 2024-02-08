@@ -1390,15 +1390,15 @@
   resolved "https://registry.npmjs.org/@reflexio/bite-forms-v1/-/bite-forms-v1-1.0.1-alpha.tgz#f17d68cb75cd12a2dcd5d2cf8d194d786c6b9395"
   integrity sha512-lRSvEphaL3VoXN8KzoHqhUyIEMT7T0QeMUwfv2HyTlTUpGmKHzFVJ9IBpyzKpN3GiK+cIPqrRb9oDupbkY05DQ==
 
-"@reflexio/bite-routing-v1@1.0.2-alpha":
-  version "1.0.2-alpha"
-  resolved "https://registry.npmjs.org/@reflexio/bite-routing-v1/-/bite-routing-v1-1.0.2-alpha.tgz#f3f171ae388db34f2778d4bdf25ecc570b38df8b"
-  integrity sha512-053fNHBwDBtRq7BEiQRyYP2szpak6PpG8+SY+/+Nn3RzSYo+d0oaylrz6+geuxipppyMI1pOpPc9YBc+O+fYvg==
+"@reflexio/bite-routing-v1@1.0.3-alpha":
+  version "1.0.3-alpha"
+  resolved "https://registry.npmjs.org/@reflexio/bite-routing-v1/-/bite-routing-v1-1.0.3-alpha.tgz#bae28b10bacac269484c59dc5e174736d391d90a"
+  integrity sha512-m8u2+i5lpMG4uAXm9+LTCTdejO+HxqEt5yM1/4TYRWuDJw3687Av6MrwD0swZLjwdOZKA0e+XaZZxeP9LYUeew==
 
-"@reflexio/bite-staging-v1@1.0.1-alpha":
-  version "1.0.1-alpha"
-  resolved "https://registry.npmjs.org/@reflexio/bite-staging-v1/-/bite-staging-v1-1.0.1-alpha.tgz#3fb85b3dc4a9a71bc52bd803b79c8d4140a67096"
-  integrity sha512-I4TeI9zo1utT2bkaHPabKBO358kP+2PB3w+SA5plg1XZEDKwX12kiI37jbT2eSfy6IXczdVvavENPus1YtaCeg==
+"@reflexio/bite-staging-v1@1.0.2-alpha":
+  version "1.0.2-alpha"
+  resolved "https://registry.npmjs.org/@reflexio/bite-staging-v1/-/bite-staging-v1-1.0.2-alpha.tgz#ebcd57aebfe61e5ed8f30d2eed4ecc633f38f98d"
+  integrity sha512-uVH/jR3azpvZFg06dTcZTG2XlFk4GQGS5/hViRhRpC1mR+QmAIQZLiT7k8+zR43owBPoBVdqpDbfvB4V9+nPxg==
 
 "@reflexio/core-v1@^1.1.0":
   version "1.1.0"
