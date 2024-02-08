@@ -56,7 +56,7 @@ export type IAppTriggers = {
     closeDialog: null;
   }>;
   router: BiteStatusWrap<IRouterTriggers>;
-  stager: BiteStatusWrap<IStagingTriggers<IAppTriggers, IAppState>>;
+  stager: BiteStatusWrap<IStagingTriggers<_ITriggers, _IState>>;
 }
 
 
@@ -71,7 +71,7 @@ export const appControllerBite
 }, {
   script: AppScript,
   'instance': 'stable',
-  'watchScope': ['appController'],
+  'watchScope': ['appController', 'router'],
   'initOn': 'init'
 })
 
