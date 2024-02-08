@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Fragment, memo } from 'react';
+import { CreateUserDialog } from './CreateProfileDialog';
 import cn from 'classnames';
 import { useTrigger } from '@reflexio/react-v1/lib/useTrigger';
 import { useReflector } from '@reflexio/react-v1/lib/useReflector';
 import { _IState, _ITriggers } from '../../_redux/types';
+import './styles.less';
 
 export const Dialog = memo(() => {
   const trigger = useTrigger<_ITriggers>('Dialog');
@@ -15,15 +17,20 @@ export const Dialog = memo(() => {
 
   const onDialogClose = () => {
     // trigger('dialog', 'clickBackgroud', null);
-    trigger('router', 'goBack', null)
+    trigger('router', 'goTo', '/users')
     // trigger('usersController', 'setState', {
     //   currentUserId: null,
     // });
   };
 
-  return (
-    <div className={'dialog-container'}>
-     Create user
+  return appState.appController.dialog ? (
+    <div className='popupBackground'>
+      <div className='popupWindow' onClick={onDialogClose}>
+      {
+        appState.appController.dialog?.createUser ? <CreateUserDialog/>: null
+      }
+      </div>
     </div>
-  );
+  ) : null;
+
 });

@@ -9,8 +9,8 @@ export const userProfileStages: {
   LOAD_USERS: (params: Array<number>) => ({
     name: 'LOAD_USERS',
     validator: (opt) => {
-
-      return false
+    
+      return true
     },
     notValidHandler: (opt) => {
 
@@ -20,16 +20,26 @@ export const userProfileStages: {
   PAGE_USERS: (params: Array<number>) => ({
     name: 'PAGE_USERS',
     assemble: (opt) => {
- 
+        opt.trigger('appController', 'setPage', {
+            'users': true
+        })
+        console.log('asm')
+        console.log(opt.getCurrentState().app)
     },
     disassemble: (opt) => {
  
     },
+    validator: (opt) => true
   }),
-  DIALOG_EDIT_USER: (params: Array<number>) => ({
-    name: 'DIALOG_EDIT_USER',
+  DIALOG_CREATE_USER: (params: Array<number>) => ({
+    name: 'DIALOG_CREATE_USER',
     assemble: (opt) => {
-
+        opt.trigger('appController', 'setDialog', {
+            'createUser': true
+        })
     },
+    disassemble: (opt) => {
+        opt.trigger('appController', 'closeDialog', null)
+    }
   }),
 };

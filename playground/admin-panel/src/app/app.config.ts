@@ -66,11 +66,22 @@ export type IAppTriggers = {
 export const appControllerBite 
     = Bite<IAppTriggers, IAppState, 'appController', _ITriggers>({
   'init': null,
-  setState: null,
-  setDialog: null,
+  setState(state, payload) {
+    Object.assign(state.appController, payload)
+  },
+  setDialog(state, payload) {
+    if(!state.appController.dialog) {
+      state.appController.dialog = {}
+    }
+    Object.assign(state.appController.dialog, payload)
+  },
   setSideBar: null,
-  closeDialog: null,
-  'setPage': null
+  closeDialog(state, payload) {
+    state.appController.dialog = null
+  },
+  setPage(state, payload) {
+    Object.assign(state.appController.page, payload)
+  }
 }, {
   script: AppScript,
   'instance': 'stable',

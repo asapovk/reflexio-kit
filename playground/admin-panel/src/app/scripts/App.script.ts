@@ -6,18 +6,18 @@ import {userProfileStages} from '..//stages/users.stage'
 
 const routes = [
     {
-        route: '/users',
-        stages: [
-            userProfileStages.LOAD_USERS(), 
-            userProfileStages.PAGE_USERS()]
-    },
-    {
         route: '/users/create',
         stages: [
             userProfileStages.LOAD_USERS(),  
             userProfileStages.PAGE_USERS(), 
-            userProfileStages.DIALOG_EDIT_USER()
+            userProfileStages.DIALOG_CREATE_USER()
         ]
+    },
+    {
+        route: '/users',
+        stages: [
+            userProfileStages.LOAD_USERS(), 
+            userProfileStages.PAGE_USERS()]
     },
 ]
 
@@ -36,11 +36,11 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
         this.opts.trigger('stager', 'init', {
             'failHandler': (opt) => {
                 console.log('fail');
-                opt.trigger('router', 'goTo', '/users');
+                //opt.trigger('router', 'goTo', '/users');
             },
             routes,
         });
-        this.opts.trigger('router', 'goTo', '/fusers');
+        this.opts.trigger('router', 'goTo', '/users/create');
     }
 
     watch(args: WatchArgsType<IAppTriggers, 'appController'>): void {
@@ -49,6 +49,7 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
         if(goToDestinationEvent.isCatched) {
             const destination =
             this.opts.getCurrentState().app.router.destination;
+            console.log(destination);
             this.opts.trigger('stager', 'go', destination)
         }
     }

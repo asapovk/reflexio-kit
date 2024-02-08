@@ -1,6 +1,6 @@
 {
     "name": "@reflexio/bite-routing-v1",
-    "version": "1.0.2-alpha",
+    "version": "1.0.3-alpha",
     "description": "Reflexio bite-routing-v1 package",
     "files": ["lib", "index.d.ts", "readme.md"],
     "keywords": ["react", "redux"],

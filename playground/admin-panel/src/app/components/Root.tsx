@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { useTrigger } from '@reflexio/react-v1/lib/useTrigger';
 import { useReflector } from '@reflexio/react-v1/lib/useReflector';
 import { _IState, _ITriggers } from '../../_redux/types';
+import { UsersPage } from './UsersPage';
+import { Dialog } from './Dialog';
 
 export const AppContainer = () => {
   const trigger = useTrigger<_ITriggers>('AppContainer');
@@ -11,18 +13,17 @@ export const AppContainer = () => {
     ['appController']
   );
 
-  useLayoutEffect(() => trigger('appController', 'init', null), []);
+  useEffect(() => trigger('appController', 'init', null), []);
 
   const currentPage = appState.appController.page;
   const sideBar = appState.appController.sideBar;
+  console.log(currentPage);
+  console.log('render');
 
   return (
     <div className='app-container'>
-      Hello app
-      {/* {sideBar ? <Sidebar /> : null}
       {currentPage.users ? <UsersPage /> : null}
-      {currentPage.groups ? <GroupsPage /> : null}
-      <Dialog /> */}
+      <Dialog/>
     </div>
   );
 };
