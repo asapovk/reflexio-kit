@@ -3,7 +3,7 @@ import React, { Fragment, memo } from 'react';
 import cn from 'classnames';
 import { useTrigger } from '@reflexio/react-v1/lib/useTrigger';
 import { useReflector } from '@reflexio/react-v1/lib/useReflector';
-import { _IState, _ITriggers } from '../../_redux';
+import { _IState, _ITriggers } from '../../_redux/types';
 
 export const Dialog = memo(() => {
   const trigger = useTrigger<_ITriggers>('Dialog');
@@ -23,7 +23,7 @@ export const Dialog = memo(() => {
 
   return (
     <div className={'dialog-container'}>
-      <Fragment>{appState.appController.dialog?.createUser ? <UserView /> : null}</Fragment>
+     Create user
     </div>
   );
 });

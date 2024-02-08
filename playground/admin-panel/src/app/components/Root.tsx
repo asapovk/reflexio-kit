@@ -2,7 +2,7 @@
 import React, { useLayoutEffect } from 'react';
 import { useTrigger } from '@reflexio/react-v1/lib/useTrigger';
 import { useReflector } from '@reflexio/react-v1/lib/useReflector';
-import { _IState, _ITriggers } from '../../_redux';
+import { _IState, _ITriggers } from '../../_redux/types';
 
 export const AppContainer = () => {
   const trigger = useTrigger<_ITriggers>('AppContainer');
@@ -18,10 +18,11 @@ export const AppContainer = () => {
 
   return (
     <div className='app-container'>
-      {sideBar ? <Sidebar /> : null}
+      Hello app
+      {/* {sideBar ? <Sidebar /> : null}
       {currentPage.users ? <UsersPage /> : null}
       {currentPage.groups ? <GroupsPage /> : null}
-      <Dialog />
+      <Dialog /> */}
     </div>
   );
 };

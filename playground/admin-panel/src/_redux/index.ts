@@ -1,7 +1,26 @@
-import { IAppState, IAppTriggers } from '../app/app.config';
+import { createStore, applyMiddleware, compose, Middleware, combineReducers } from 'redux';
+import { appSlice } from '../app/app.config';
 
-export interface _IState {
-  app: IAppState;
+
+const rootReducer = combineReducers({
+  ...appSlice.reducer,
+
+});
+
+
+function configureStore() {
+  const middlewares: Middleware[] = [
+    appSlice.middleware,
+  ];
+
+  const store = createStore(
+    rootReducer,
+    compose(applyMiddleware(...middlewares))
+  );
+
+  return store;
 }
+const store = configureStore();
 
-export type _ITriggers = IAppTriggers;
+export const dispatch = store.dispatch;
+export default store;
