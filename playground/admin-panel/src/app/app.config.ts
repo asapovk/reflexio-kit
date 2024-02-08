@@ -8,6 +8,7 @@ import { IStagingTriggers } from '@reflexio/bite-staging-v1/lib/types';
 import { _IState, _ITriggers } from '../_redux/types';
 import { biteRouting } from '@reflexio/bite-routing-v1';
 import { AppScript } from './scripts/App.script';
+import { biteStaging } from '@reflexio/bite-staging-v1';
 
 export interface StagerContext {
   data: any;
@@ -59,7 +60,8 @@ export type IAppTriggers = {
 }
 
 
-export const appControllerBite = Bite<IAppTriggers, IAppState, 'appController', _ITriggers>({
+export const appControllerBite 
+    = Bite<IAppTriggers, IAppState, 'appController', _ITriggers>({
   'init': null,
   setState: null,
   setDialog: null,
@@ -73,11 +75,8 @@ export const appControllerBite = Bite<IAppTriggers, IAppState, 'appController', 
   'initOn': 'init'
 })
 
-export const routerBite = biteRouting<IAppTriggers, IAppState, 'router', _ITriggers>('router')
-export const stagerBite = biteRouting<IAppTriggers, IAppState, 'stager', _ITriggers>('stager')
-
 export const appSlice = Slice<IAppTriggers, IAppState, _ITriggers, _IState>('app', {
   'appController': appControllerBite,
-  'router': routerBite,
-  'stager': stagerBite,
+  'router': biteRouting('router'),
+  'stager': biteStaging('stager'),
 }, appInitialState)
