@@ -46,7 +46,7 @@ export interface IStagingInitArgs<Opts> {
   failHandler: (opt: Opts) => Promise<void> | void;
 }
 
-export interface IStagingTriggers<Tg, St> {
+export type IStagingTriggers<Tg, St>  = {
   init: IStagingInitArgs<Opts<Tg, St>>;
   addRoute: {
     route: string;

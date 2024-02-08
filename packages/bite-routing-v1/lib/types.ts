@@ -13,7 +13,7 @@ export interface IAppRoutesConfig {
   [key: string]: IRouteConfig;
 }
 
-export interface IRouterTriggers {
+export type  IRouterTriggers = {
   init: IAppRoutesConfig | null;
   goTo: string; // change currentLocation and window.pushState()
   goBack: null;

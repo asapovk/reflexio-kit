@@ -15,7 +15,7 @@ export const Dialog = memo(() => {
 
   const onDialogClose = () => {
     // trigger('dialog', 'clickBackgroud', null);
-    trigger('router', '', null);
+    trigger('router', 'goBack', null)
     // trigger('usersController', 'setState', {
     //   currentUserId: null,
     // });
@@ -23,7 +23,7 @@ export const Dialog = memo(() => {
 
   return (
     <div className={'dialog-container'}>
-      <Fragment>{appState.appController.dialog?.createGroup ? <UserView /> : null}</Fragment>
+      <Fragment>{appState.appController.dialog?.createUser ? <UserView /> : null}</Fragment>
     </div>
   );
 });
