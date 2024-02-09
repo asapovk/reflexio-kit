@@ -10,6 +10,8 @@ import { biteRouting } from '@reflexio/bite-routing-v1';
 import { AppScript } from './scripts/App.script';
 
 import { biteStaging } from '@reflexio/bite-staging-v1';
+import {biteAsync, asyncInitialState} from '../../../../packages/bite-async-v1/lib/index';
+import {AsyncState, AsyncTrigger} from '../../../../packages/bite-async-v1/lib/types';
 //import { biteStaging } from '../../../../packages/bite-staging-v1/lib/index';
 
 
@@ -34,6 +36,7 @@ export type IAppState = {
   };
   router: IRouterState;
   stager?: StagerContext;
+  loadUsers: AsyncState<null, Array<any>>
 }
 
 export const appInitialState: IAppState = {
@@ -46,7 +49,8 @@ export const appInitialState: IAppState = {
   'appController': {
     'isReady': false,
     'page': {},
-  }
+  },
+  loadUsers: asyncInitialState()
 }
 
 export type IAppTriggers = {
@@ -60,6 +64,7 @@ export type IAppTriggers = {
   }>;
   router: BiteStatusWrap<IRouterTriggers>;
   stager: BiteStatusWrap<IStagingTriggers<_ITriggers, _IState>>;
+  loadUsers: BiteStatusWrap<AsyncTrigger<null, Array<any>>>
 }
 
 
@@ -93,4 +98,8 @@ export const appSlice = Slice<IAppTriggers, IAppState, _ITriggers, _IState>('app
   'appController': appControllerBite,
   'router': biteRouting('router'),
   'stager': biteStaging('stager'),
+  'loadUsers': biteAsync('loadUsers', {
+    'pr': (opt, input) => opt.injected.loadUsers(input),
+    'timeout': 5000
+  })
 }, appInitialState)
