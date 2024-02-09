@@ -1,21 +1,10 @@
 import { createStore, applyMiddleware, compose, Middleware, combineReducers } from 'redux';
 import { appSlice } from '../app/app.config';
+import { loadUsers } from '../_utils/loadUsers.dev';
 
 
 appSlice.inject({
-  loadUsers: () => new Promise((res, rej) => {
-    setTimeout(()=>{
-      res([{
-          name: 'Invan',
-          id: 1
-        },
-        {
-          name: 'Vasya',
-          id: 2
-        }
-    ])
-    },1000)
-  })
+  loadUsers: loadUsers
 })
 
 
