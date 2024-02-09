@@ -31,7 +31,7 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
         this.opts = opts;
     }
 
-    init(args: null): void {
+    async init(args: null): Promise<void> {
         this.opts.trigger('router', 'init', null);
         this.opts.trigger('stager', 'init', {
             'failHandler': (opt) => {
@@ -41,6 +41,8 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
             routes,
         });
         this.opts.trigger('router', 'goTo', '/users/create');
+        const res =  await this.opts.hook('loadUsers', 'init', 'done', null);
+        console.log(res);
     }
 
     watch(args: WatchArgsType<IAppTriggers, 'appController'>): void {

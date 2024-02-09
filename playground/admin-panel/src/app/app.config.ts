@@ -99,7 +99,7 @@ export const appSlice = Slice<IAppTriggers, IAppState, _ITriggers, _IState>('app
   'router': biteRouting('router'),
   'stager': biteStaging('stager'),
   'loadUsers': biteAsync('loadUsers', {
-    'pr': (opt, input) => opt.injected.loadUsers(input),
+    'pr': (opt, input) => opt.injected.loadUsers(),
     'timeout': 5000
   })
 }, appInitialState)

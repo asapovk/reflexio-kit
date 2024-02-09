@@ -2,6 +2,23 @@ import { createStore, applyMiddleware, compose, Middleware, combineReducers } fr
 import { appSlice } from '../app/app.config';
 
 
+appSlice.inject({
+  loadUsers: () => new Promise((res, rej) => {
+    setTimeout(()=>{
+      res([{
+          name: 'Invan',
+          id: 1
+        },
+        {
+          name: 'Vasya',
+          id: 2
+        }
+    ])
+    },1000)
+  })
+})
+
+
 const rootReducer = combineReducers({
   ...appSlice.reducer,
 
