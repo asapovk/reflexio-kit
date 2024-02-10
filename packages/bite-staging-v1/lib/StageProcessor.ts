@@ -94,10 +94,18 @@ export class StageProcessor<O> {
     }
   }
 
+  private reset() {
+    this.curPath = null;
+    this.prevPath = null;
+    this.prevStagesQueue = [],
+    this.stagesQueue = [];
+  }
+  
   public async process() {
     while (this.stagesQueue.length) {
       const result = await this.processStage();
       if (!result) {
+        this.reset();
         await this.opts.failHandler(this.opts.opt);
         break;
       }

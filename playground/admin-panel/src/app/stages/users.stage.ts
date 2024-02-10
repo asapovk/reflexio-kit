@@ -19,10 +19,15 @@ export const userProfileStages: {
   }),
   PAGE_USERS: (params: Array<number>) => ({
     name: 'PAGE_USERS',
-    assemble: (opt) => {
-        opt.trigger('appController', 'setPage', {
+    assemble: async (opt) => {
+      await new Promise((res, rej)=> {
+        setTimeout(()=> {
+          opt.trigger('appController', 'setPage', {
             'users': true
-        })
+          })
+        res('ok')
+        }, 2000)
+      })
         console.log('asm')
         console.log(opt.getCurrentState().app)
     },
@@ -33,10 +38,16 @@ export const userProfileStages: {
   }),
   DIALOG_CREATE_USER: (params: Array<number>) => ({
     name: 'DIALOG_CREATE_USER',
-    assemble: (opt) => {
-        opt.trigger('appController', 'setDialog', {
+    assemble: async (opt) => {
+
+      await new Promise((res, rej)=> {
+        setTimeout(()=> {
+          opt.trigger('appController', 'setDialog', {
             'createUser': true
         })
+        res('ok')
+        }, 2000)
+      })
     },
     disassemble: (opt) => {
         opt.trigger('appController', 'closeDialog', null)

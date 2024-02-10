@@ -51,7 +51,6 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
         if(goToDestinationEvent.isCatched) {
             const destination =
             this.opts.getCurrentState().app.router.destination;
-            console.log(destination);
             this.opts.trigger('stager', 'go', destination)
         }
     }

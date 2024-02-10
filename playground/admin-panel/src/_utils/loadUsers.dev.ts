@@ -10,5 +10,5 @@ export const loadUsers =  () => new Promise((res, rej) => {
           id: 2
         }
     ])
-    },1000)
+    },3000)
   })
