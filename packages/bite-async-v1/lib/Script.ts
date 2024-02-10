@@ -11,6 +11,7 @@ export class AsyncScript  {
       let resulted = false;
       let loading = true;
       try {
+        
         data = await new Promise((resolve, reject) => {
           const t = setTimeout(() => {
             timeout = true;
@@ -29,10 +30,17 @@ export class AsyncScript  {
             });
         });
       } catch (err) {
+        data = err
         rejected = true
       } finally {
         loading = false;
         resulted = true;
+        if(co.errorCatcher) {
+          const isError = co.errorCatcher(this.opts, data)
+          if(isError) {
+            rejected = true
+          }
+        }
         this.opts.setStatus('done', {
           data,
           rejected,

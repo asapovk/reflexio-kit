@@ -8,7 +8,8 @@ import { DefautOpts } from '@reflexio/core-v1/lib/types';
 
 export function biteAsync<Tg, St, K extends keyof Tg, RTg>(biteName: K, props: {
     pr: <I, D, A>(opt: DefautOpts<Tg, St, K, any>, input: I) => Promise<D>,
-    timeout?: number
+    timeout?: number,
+    errorCatcher?: (opt: DefautOpts<Tg, St, K, any>, res: unknown) => boolean;
 }) {
     
     const defaultStartReducer = (state, payload) => {
@@ -40,6 +41,7 @@ export function biteAsync<Tg, St, K extends keyof Tg, RTg>(biteName: K, props: {
         promise: props.pr,
         //@ts-ignore
         timeout: props.timeout || null,
+        errorCatcher: props.errorCatcher
       },
   });
 }

@@ -100,6 +100,10 @@ export const appSlice = Slice<IAppTriggers, IAppState, _ITriggers, _IState>('app
   'stager': biteStaging('stager'),
   'loadUsers': biteAsync('loadUsers', {
     'pr': (opt, input) => opt.injected.loadUsers(),
-    'timeout': 5000
+    'timeout': 5000,
+    errorCatcher: (opt, err) => {
+      console.log('errorCatcher', err)
+      return true
+    }
   })
 }, appInitialState)
