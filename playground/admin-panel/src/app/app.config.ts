@@ -36,7 +36,6 @@ export type IAppState = {
   };
   router: IRouterState;
   stager?: StagerContext;
-  loadUsers: AsyncState<null, Array<any>>
 }
 
 export const appInitialState: IAppState = {
@@ -49,8 +48,7 @@ export const appInitialState: IAppState = {
   'appController': {
     'isReady': false,
     'page': {},
-  },
-  loadUsers: asyncInitialState()
+  }
 }
 
 export type IAppTriggers = {
@@ -64,7 +62,6 @@ export type IAppTriggers = {
   }>;
   router: BiteStatusWrap<IRouterTriggers>;
   stager: BiteStatusWrap<IStagingTriggers<_ITriggers, _IState>>;
-  loadUsers: BiteStatusWrap<AsyncTrigger<null, Array<any>>>
 }
 
 
@@ -97,13 +94,5 @@ export const appControllerBite
 export const appSlice = Slice<IAppTriggers, IAppState, _ITriggers, _IState>('app', {
   'appController': appControllerBite,
   'router': biteRouting('router'),
-  'stager': biteStaging('stager'),
-  'loadUsers': biteAsync('loadUsers', {
-    'pr': (opt, input) => opt.injected.loadUsers(),
-    'timeout': 5000,
-    errorCatcher: (opt, err) => {
-      console.log('errorCatcher', err)
-      return true
-    }
-  })
+  'stager': biteStaging('stager')
 }, appInitialState)

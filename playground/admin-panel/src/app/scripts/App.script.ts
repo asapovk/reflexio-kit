@@ -24,7 +24,7 @@ const routes = [
 
 export class AppScript extends Script<_ITriggers, _IState, 'appController', 'init', null> {
     
-    public opts: ScriptOptsType<IAppTriggers, _IState, 'appController', null>;
+    public opts: ScriptOptsType<_ITriggers, _IState, 'appController', null>;
    
     constructor(opts) {
         super()
@@ -45,10 +45,10 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
         console.log(res);
     }
 
-    watch(args: WatchArgsType<IAppTriggers, 'appController'>): void {
-        if(args.trigger === 'loadUsers') {
-            args.hangOn()
-        }
+    watch(args: WatchArgsType<_ITriggers, 'appController'>): void {
+        // if(args.trigger === 'loadUsers') {
+        //     args.hangOn()
+        // }
  
         const goToDestinationEvent = this.opts.catchEvent('router', 'goToDestination', args)
         if(goToDestinationEvent.isCatched) {

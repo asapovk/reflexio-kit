@@ -1,22 +1,23 @@
 import { createStore, applyMiddleware, compose, Middleware, combineReducers } from 'redux';
 import { appSlice } from '../app/app.config';
 import { loadUsers } from '../_utils/loadUsers.dev';
+import { usersSlice } from '../users/users.config';
 
-
-appSlice.inject({
+usersSlice.inject({
   loadUsers: loadUsers
 })
 
 
 const rootReducer = combineReducers({
   ...appSlice.reducer,
-
+  ...usersSlice.reducer
 });
 
 
 function configureStore() {
   const middlewares: Middleware[] = [
     appSlice.middleware,
+    usersSlice.middleware
   ];
 
   const store = createStore(
