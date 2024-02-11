@@ -36,7 +36,7 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
         this.opts.trigger('stager', 'init', {
             'failHandler': (opt) => {
                 console.log('fail');
-                //opt.trigger('router', 'goTo', '/users');
+                opt.trigger('router', 'goTo', '/users');
             },
             routes,
         });
@@ -46,6 +46,9 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
     }
 
     watch(args: WatchArgsType<IAppTriggers, 'appController'>): void {
+        if(args.trigger === 'loadUsers') {
+            args.hangOn()
+        }
  
         const goToDestinationEvent = this.opts.catchEvent('router', 'goToDestination', args)
         if(goToDestinationEvent.isCatched) {

@@ -1385,6 +1385,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@reflexio/bite-async-v1@1.0.1-alpha":
+  version "1.0.1-alpha"
+  resolved "https://registry.npmjs.org/@reflexio/bite-async-v1/-/bite-async-v1-1.0.1-alpha.tgz#ae053f2427e02bd6744030f7981b264e460d0d3b"
+  integrity sha512-Wc+q8sD4jCIZ76AomgX6WwJXIKgVCmaBaf/adOZage894xy9YCqJvMcyjJytXX+uTUR+juDUt7quYkSxgpNk0A==
+
 "@reflexio/bite-forms-v1@1.0.1-alpha":
   version "1.0.1-alpha"
   resolved "https://registry.npmjs.org/@reflexio/bite-forms-v1/-/bite-forms-v1-1.0.1-alpha.tgz#f17d68cb75cd12a2dcd5d2cf8d194d786c6b9395"
@@ -1400,10 +1405,10 @@
   resolved "https://registry.npmjs.org/@reflexio/bite-staging-v1/-/bite-staging-v1-1.0.2-alpha.tgz#ebcd57aebfe61e5ed8f30d2eed4ecc633f38f98d"
   integrity sha512-uVH/jR3azpvZFg06dTcZTG2XlFk4GQGS5/hViRhRpC1mR+QmAIQZLiT7k8+zR43owBPoBVdqpDbfvB4V9+nPxg==
 
-"@reflexio/core-v1@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@reflexio/core-v1/-/core-v1-1.1.0.tgz#d9493ec3a60d11eb9382dcc315446de782e93ab4"
-  integrity sha512-4RXw1W2sC6qVj9XIMPDxtGM+WKvrBekqNOe/J+cVtG85w2DNlL06b/xsJtWWf5s/m7ZbHgtjC/fiwmzyq6U4Mg==
+"@reflexio/core-v1@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/@reflexio/core-v1/-/core-v1-1.1.1.tgz#e80e0ea392f53d83ad95af0ad51fb831345254e1"
+  integrity sha512-jOQ4qGKsNMH7l75xOL+tGOy6PWCym/znNWFH1t+X/as9iJVUbOysTksgXQs8JG4CxTl74ihL1zUE/MJAzDi6/w==
 
 "@reflexio/react-v1@^1.1.4":
   version "1.1.5"

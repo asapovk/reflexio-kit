@@ -9,10 +9,10 @@ import { _IState, _ITriggers } from '../_redux/types';
 import { biteRouting } from '@reflexio/bite-routing-v1';
 import { AppScript } from './scripts/App.script';
 
-//import { biteStaging } from '@reflexio/bite-staging-v1';
-import {biteAsync, asyncInitialState} from '../../../../packages/bite-async-v1/lib/index';
-import {AsyncState, AsyncTrigger} from '../../../../packages/bite-async-v1/lib/types';
-import { biteStaging } from '../../../../packages/bite-staging-v1/lib/index';
+import { biteStaging } from '@reflexio/bite-staging-v1';
+import {biteAsync, asyncInitialState} from  '@reflexio/bite-async-v1' //'../../../../packages/bite-async-v1/lib/index';
+import {AsyncState, AsyncTrigger} from '@reflexio/bite-async-v1/lib/types' //'../../../../packages/bite-async-v1/lib/types';
+//import { biteStaging } from '../../../../packages/bite-staging-v1/lib/index';
 
 
 export interface StagerContext {
@@ -90,7 +90,7 @@ export const appControllerBite
 }, {
   script: AppScript,
   'instance': 'stable',
-  'watchScope': ['appController', 'router'],
+  'watchScope': [],
   'initOn': 'init'
 })
 

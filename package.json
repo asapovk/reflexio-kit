@@ -17,7 +17,7 @@
       "reflexio"
     ],
     "devDependencies": {
-      "@reflexio/core-v1": "^1.1.0",
+      "@reflexio/core-v1": "^1.1.1",
       "@reflexio/react-v1": "^1.1.5",
       "react": "^18.2.0",
       "react-dom": "^18.2.0",

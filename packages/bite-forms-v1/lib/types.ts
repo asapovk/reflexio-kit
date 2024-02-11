@@ -45,6 +45,8 @@ export type InitFormOpts<RT, RS> = {
     blurField: {
       fieldName: string;
     };
+    addField: InitFiledOpts,
+    dropField: string;
     focusField: {
       fieldName: string;
     };

@@ -8,18 +8,18 @@ import { Dialog } from './Dialog';
 
 export const AppContainer = () => {
   const trigger = useTrigger<_ITriggers>('AppContainer');
-  const appState = useReflector<_ITriggers, _IState, _IState['app']>(
-    (state) => state.app,
+  const appState = useReflector<_ITriggers, _IState, _IState>(
+    (state) => state,
     ['appController']
   );
 
   useEffect(() => trigger('appController', 'init', null), []);
 
-  const currentPage = appState.appController.page;
-  const sideBar = appState.appController.sideBar;
+  const currentPage = appState.app.appController.page;
+  const sideBar = appState.app.appController.sideBar;
   console.log(currentPage);
   console.log('render');
-
+  console.log(appState);
   return (
     <div className='app-container'>
       {currentPage.users ? <UsersPage /> : null}

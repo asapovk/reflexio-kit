@@ -87,6 +87,32 @@ export class FormsScript<RT, RS> {
     if (!this.isInit) {
       return;
     }
+    if(args.status  === 'addField') {
+        const opt = args.payload;
+        this.fieldValidators[opt.name] = {
+          validators: opt.validators,
+          validateOn: opt.validateOn,
+        };
+        this.formActualState.fields[opt.name] = {
+          active: false,
+          error: null,
+          showErrorOn: opt.validateOn,
+          visited: false,
+          sync: opt.sync,
+          value: opt.initialValue,
+          meta: opt.meta,
+        };
+      const disabled = this.isSubmitDisabled(this.formActualState, this.touched);
+      this.formActualState.isSubmitDisabled = disabled;
+    }
+    if(args.status === 'dropField') {
+      const fieldName = args.payload;
+      delete this.fieldValidators[fieldName];
+      delete this.formActualState.fields[fieldName];
+      const disabled = this.isSubmitDisabled(this.formActualState, this.touched);
+      this.formActualState.isSubmitDisabled = disabled;
+    }
+
     const formState: IFormState =
       this.opts.getCurrentState()[this.sliceName][this.biteName];
     if (args.status === 'typeField') {

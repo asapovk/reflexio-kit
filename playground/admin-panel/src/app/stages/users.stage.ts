@@ -3,10 +3,8 @@ import { _IState, _ITriggers } from '../../_redux/types';
 
 export type OPTS = Opts<_ITriggers, _IState>
 
-export const userProfileStages: {
-  [key: string]: (params?: Array<number>) => Stage<OPTS>;
-} = {
-  LOAD_USERS: (params: Array<number>) => ({
+export const userProfileStages = {
+  LOAD_USERS: (params?: Array<number>) => ({
     name: 'LOAD_USERS',
     validator: (opt) => {
     
@@ -17,7 +15,7 @@ export const userProfileStages: {
       return true;
     },
   }),
-  PAGE_USERS: (params: Array<number>) => ({
+  PAGE_USERS: (params?: Array<number>) => ({
     name: 'PAGE_USERS',
     assemble: async (opt) => {
       await new Promise((res, rej)=> {
@@ -36,7 +34,7 @@ export const userProfileStages: {
     },
     validator: (opt) => true
   }),
-  DIALOG_CREATE_USER: (params: Array<number>) => ({
+  DIALOG_CREATE_USER: (params?: Array<number>) => ({
     name: 'DIALOG_CREATE_USER',
     assemble: async (opt) => {
 
