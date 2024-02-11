@@ -41,8 +41,7 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
             routes,
         });
         this.opts.trigger('router', 'goTo', '/users/create');
-        const res =  await this.opts.hook('loadUsers', 'init', 'done', null);
-        console.log(res);
+        this.opts.trigger('usersController', 'init', null);
     }
 
     watch(args: WatchArgsType<_ITriggers, 'appController'>): void {

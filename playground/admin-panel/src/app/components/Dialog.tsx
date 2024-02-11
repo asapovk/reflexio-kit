@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Fragment, memo } from 'react';
-import { CreateUserDialog } from './CreateProfileDialog';
+import { CreateUserDialog } from '../../users/components/CreateProfileDialog';
 import cn from 'classnames';
 import { useTrigger } from '@reflexio/react-v1/lib/useTrigger';
 import { useReflector } from '@reflexio/react-v1/lib/useReflector';

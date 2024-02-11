@@ -1,7 +1,7 @@
 {
-    "name": "@reflexio/bite-forms-v1",
-    "version": "1.0.3-alpha",
-    "description": "Reflexio bite-forms-v1 package",
+    "name": "@reflexio/bite-light-controller-v1",
+    "version": "1.0.1-alpha",
+    "description": "Reflexio bite-routing-v1 package",
     "files": ["lib", "index.d.ts", "readme.md"],
     "keywords": ["react", "redux"],
     "repository": "github:reflexio/reflexio-on-redux",

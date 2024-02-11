@@ -30,8 +30,8 @@ export class FormsScript<RT, RS> {
   private biteName: string;
 
   private isInit: boolean = false;
-  private props: InitFormOpts<RT, RS>;
-  public init(props: InitFormOpts<RT, RS>) {
+  private props: InitFormOpts;
+  public init(props: InitFormOpts) {
     if (!this.isInit) {
       this.sliceName = this.opts.sliceName; //props.sliceName as string;
       this.biteName = this.opts.biteName; //props.biteName as string;

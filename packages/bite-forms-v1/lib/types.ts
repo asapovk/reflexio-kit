@@ -1,4 +1,4 @@
-export type InitFormOpts<RT, RS> = {
+export type InitFormOpts = {
     //Cюда конфиги для каждого конкретного поля
     fieldsOpts: Array<InitFiledOpts>;
     //Имя байта к которому крепится данный скрипт
@@ -40,8 +40,8 @@ export type InitFormOpts<RT, RS> = {
     meta?: any;
   };
   
-  export type IFormBiteTriggers<RT, RS> = {
-    init: InitFormOpts<RT, RS>;
+  export type IFormBiteTriggers = {
+    init: InitFormOpts;
     blurField: {
       fieldName: string;
     };
