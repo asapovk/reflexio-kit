@@ -1395,10 +1395,10 @@
   resolved "https://registry.npmjs.org/@reflexio/bite-forms-v1/-/bite-forms-v1-1.0.3-alpha.tgz#d31ade596b35955789d1d96b4fcf65ed4c7d088b"
   integrity sha512-IR4uuPill/SAZvpeArJJEH8QWIQByPdvgjKBQv3DZY+80b3K/3riaSSfIGAFc+dsyCAhSmxG9/KkSiXAZR3UoA==
 
-"@reflexio/bite-light-controller-v1@1.0.0-alpha":
-  version "1.0.0-alpha"
-  resolved "https://registry.npmjs.org/@reflexio/bite-light-controller-v1/-/bite-light-controller-v1-1.0.0-alpha.tgz#e8715f8a8d47fcd996628e50fbe55cae39034587"
-  integrity sha512-3l+RXMo48691MyrDxbNo0mebGozDoRYDzJcbJjX3Uv4caeigOBFmJco0C6/MQfcESG63oXZU4oLyG43Wjv6Xbg==
+"@reflexio/bite-light-controller-v1@1.0.2-alpha":
+  version "1.0.2-alpha"
+  resolved "https://registry.npmjs.org/@reflexio/bite-light-controller-v1/-/bite-light-controller-v1-1.0.2-alpha.tgz#1fa606e1e4bf6510f2e1b6541191d4d6699466d9"
+  integrity sha512-cWb9wt9O4KG2NjNpxBp3hBXGe0tazxpf4bd9X44kv4LcXFUXo83CxsSCUr604Tr8UkX5st04fJ9LYu1yTRzcSw==
 
 "@reflexio/bite-routing-v1@1.0.3-alpha":
   version "1.0.3-alpha"
