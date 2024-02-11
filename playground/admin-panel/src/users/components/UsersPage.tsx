@@ -13,21 +13,8 @@ import { Button } from '../../../../__shared/_ui/Button';
 
 
 export const UsersPage = () => {
-  const trigger = useTrigger<_ITriggers>('AppContainer');
-  const appState = useReflector<_ITriggers, _IState, _IState>(
-    (state) => state,
-    ['loadUsers', 'createUserForm']
-  );
-
   return (<div>
               <div>Users page</div>
-              <TextInput 
-                onChange={(e) => trigger('createUserForm', 'typeField', {
-                'fieldName': 'username',
-                'value': e.target.value
-              })}/>
-              <div>{appState.users.createUserForm?.fields['username']?.error}</div>
-              <Button onClick={() => trigger('createUserForm', 'submitForm', null)}>submit</Button>
         </div>)
 
 

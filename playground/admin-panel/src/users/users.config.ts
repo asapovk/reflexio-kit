@@ -36,6 +36,19 @@ export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState
   usersController: biteLightController('usersController', {
     'script': {
       'init': async (opts, pld)=> {
+        opts.trigger('createUserForm', 'init', {
+          'fieldsOpts': [
+            {
+              'name': 'username',
+              'initialValue': 'Ivan',
+              validators: [],
+              sync: true,
+            },
+          ],
+          onSubmit(fst, ut) {
+            console.log(fst);
+          },
+        })
         console.log('usersControllerInit');
         const res =  await opts.hook('loadUsers', 'init', 'done', null);
         console.log(res);

@@ -17,7 +17,7 @@ export const Dialog = memo(() => {
 
   const onDialogClose = () => {
     // trigger('dialog', 'clickBackgroud', null);
-    trigger('router', 'goTo', '/users')
+    //trigger('router', 'goTo', '/users')
     // trigger('usersController', 'setState', {
     //   currentUserId: null,
     // });
