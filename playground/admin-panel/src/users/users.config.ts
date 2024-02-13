@@ -8,7 +8,7 @@ import {AsyncState, AsyncTrigger} from '@reflexio/bite-async-v1/lib/types' //'..
 import { biteForms } from '@reflexio/bite-forms-v1';
 import {IFormBiteTriggers, IFieldState, IFormState} from '@reflexio/bite-forms-v1/lib/types'
 import {biteLightController} from '@reflexio/bite-light-controller-v1'
-import {biteDerivatives} from '../../../../packages/bite-derivatives-v1/lib'
+import {biteDerivatives} from '@reflexio/bite-derivatives-v1'
 
 //import { biteStaging } from '../../../../packages/bite-staging-v1/lib/index';
 
@@ -36,8 +36,8 @@ export type IUsersTriggers = {
     init: null;
   }>;
   usersComponent: BiteStatusWrap<{
-    init: null;
-    drop: null;
+    // init: null;
+    // drop: null;
     usersList: Array<{
       id: number;
       name: string;
@@ -51,10 +51,16 @@ export type IUsersTriggers = {
 
 
 export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState>('users', {
-  usersComponent: biteDerivatives('createUserForm', {
-    'comparators': {},
-    computers: {},
-    watchScope: [],
+  usersComponent: biteDerivatives('usersComponent', {
+    computers: {
+        'usersCount': (state: _IState)=> 3,
+        'usersList':  (state: _IState)=> []
+      },
+    comparators: {
+      'usersCount': (prev, next) => true,
+      usersList: (prev, next) => true
+    },
+    watchScope: ['loadUsers'],
   }),
   usersController: biteLightController('usersController', {
     script: {

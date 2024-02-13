@@ -1,11 +1,13 @@
 import { Bite } from '@reflexio/core-v1';
 import { ComputedScript } from './Script';
-import { DefautOpts, InitArgsType, MakeBiteReducerType, TriggerPhaseKeys, WatchArgsType } from '@reflexio/core-v1/lib/types';
+import { DefautOpts, InitArgsType, MakeBiteReducerType, TriggerPhaseKeys, TriggerPhaseVals, WatchArgsType } from '@reflexio/core-v1/lib/types';
 
-
-export type Computer<Tg, K extends keyof Tg, St>  = {[ L in TriggerPhaseKeys<Tg, K>] : <M>(state: St) => M}
-export type ComparatorType<Tg, K extends keyof Tg, St> = Partial<{[C in keyof Computer<Tg, K, St>]: (prev: ReturnType<Computer<Tg, K, St>[C]>, next: ReturnType<Computer<Tg, K, St>[C]>)=> boolean}>
-
+export type Computer<Tg, K extends keyof Tg, St> = {
+    [L in TriggerPhaseKeys<Tg, K>]: (state: St) => TriggerPhaseVals<Tg>[K][L];
+};
+export type ComparatorType<Tg, K extends keyof Tg, St> = Partial<{
+    [C in keyof Computer<Tg, K, St>]: (prev: ReturnType<Computer<Tg, K, St>[C]>, next: ReturnType<Computer<Tg, K, St>[C]>) => boolean;
+}>;
 //export type IDerivativeTriggers<St> = {[K in keyof ComputedStateType<St>]: ReturnType<ComputedStateType<St>[K]>}
 
 export function biteDerivatives<Tg, St, K extends keyof Tg, RTg>(biteName: K, props: {
