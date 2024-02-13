@@ -54,11 +54,10 @@ export type IUsersTriggers = {
 
 
 export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState>('users', {
-  //@ts-ignore
   usersComponent: biteDerivatives('usersComponent', {
     computers: {
-      'usersList':  (opts, state: _IState)=> state.users.loadUsers?.data || [],
-      'usersCount': (opts, state: _IState)=> state.users.usersComponent.usersList.length
+      'usersList':  (state: _IState)=> state.users.loadUsers?.data || [],
+      'usersCount': (state: _IState)=> state.users.usersComponent.usersList.length
       },
     watchScope: ['loadUsers', 'usersController'],
     // comparators: {

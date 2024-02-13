@@ -1390,10 +1390,10 @@
   resolved "https://registry.npmjs.org/@reflexio/bite-async-v1/-/bite-async-v1-1.0.1-alpha.tgz#ae053f2427e02bd6744030f7981b264e460d0d3b"
   integrity sha512-Wc+q8sD4jCIZ76AomgX6WwJXIKgVCmaBaf/adOZage894xy9YCqJvMcyjJytXX+uTUR+juDUt7quYkSxgpNk0A==
 
-"@reflexio/bite-derivatives-v1@1.0.8-alpha":
-  version "1.0.8-alpha"
-  resolved "https://registry.npmjs.org/@reflexio/bite-derivatives-v1/-/bite-derivatives-v1-1.0.8-alpha.tgz#9abbe1c7abbf720f4a065aa876b5220a584ca026"
-  integrity sha512-jijZvGNcyI1gj14VBM8BbIPR+ljHpPpnreozYy9HKnq8HOC4XJmKSCOtDxb6KjlzJM9/2cKs4s+LblgeCBhO9Q==
+"@reflexio/bite-derivatives-v1@1.0.9-alpha":
+  version "1.0.9-alpha"
+  resolved "https://registry.npmjs.org/@reflexio/bite-derivatives-v1/-/bite-derivatives-v1-1.0.9-alpha.tgz#6821e237e5f754b195a48cfb31900d17e6819ecd"
+  integrity sha512-TgfyQmnx1cW2cRtoTFMHCO5KS4pZCAaD0AJUv7EEjK4R+xSndjTGseUe1f55Ydkrb+D5+XubtHMvD24km/DuWg==
 
 "@reflexio/bite-forms-v1@1.0.3-alpha":
   version "1.0.3-alpha"
