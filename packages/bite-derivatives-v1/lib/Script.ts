@@ -6,7 +6,7 @@ export class ComputedScript {
 
     async init(payload) {}
 
-    private defaultComparator(opts, prevVal, nextVal) {
+    private defaultComparator(prevVal, nextVal) {
        return prevVal !== nextVal
     }
 
@@ -24,7 +24,7 @@ export class ComputedScript {
             const computers = this.opts.addOpts.computers;
             const comparators = this.opts.addOpts.comparators || {};
             Object.keys(computers).forEach( key => {
-                const newComputedValue = computers[key](this.opts, state);
+                const newComputedValue = computers[key](state);
                 const comparator = comparators[key] || this.defaultComparator
                 if(comparator(this.opts, this.memorizedValues[key], newComputedValue)) {
                     if(typeof newComputedValue === 'object') {
