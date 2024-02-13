@@ -2,23 +2,20 @@ import { Bite } from '@reflexio/core-v1';
 import { ComputedScript } from './Script';
 import { DefautOpts, InitArgsType, MakeBiteReducerType, TriggerPhaseKeys, TriggerPhaseVals, WatchArgsType } from '@reflexio/core-v1/lib/types';
 
-export type Computer<Tg, K extends keyof Tg, St> = {
-    [L in TriggerPhaseKeys<Tg, K>]: (state: St) => TriggerPhaseVals<Tg>[K][L];
+export type Computer<Tg, K extends keyof Tg, St, RTg> = {
+    [L in Exclude<Exclude<TriggerPhaseKeys<Tg, K>, 'init'>, 'drop'>]: (opt: DefautOpts<Tg, St, K, RTg>, state: St) => TriggerPhaseVals<Tg>[K][L];
 };
-export type ComparatorType<Tg, K extends keyof Tg, St> = Partial<{
-    [C in keyof Computer<Tg, K, St>]: (prev: ReturnType<Computer<Tg, K, St>[C]>, next: ReturnType<Computer<Tg, K, St>[C]>) => boolean;
+export type ComparatorType<Tg, K extends keyof Tg, St, RTg> = Partial<{
+    [C in keyof Computer<Tg, K, St, RTg>]: (opt: DefautOpts<Tg, St, K, RTg>, prev: ReturnType<Computer<Tg, K, St, RTg>[C]>, next: ReturnType<Computer<Tg, K, St, RTg>[C]>) => boolean;
 }>;
 //export type IDerivativeTriggers<St> = {[K in keyof ComputedStateType<St>]: ReturnType<ComputedStateType<St>[K]>}
 
 export function biteDerivatives<Tg, St, K extends keyof Tg, RTg>(biteName: K, props: {
     watchScope: Array<keyof RTg>;
-    computers: Computer<Tg, K, St>;
-    comparators?: ComparatorType<Tg, K, St>;
+    computers: Computer<Tg, K, St, RTg>;
+    comparators?: ComparatorType<Tg, K, St, RTg>;
 }) {
-  return Bite<Tg, St, K, RTg>(
-    Object.keys(props).filter( k => ['init', 'drop'].indexOf(k) === -1 ).map(key => (state, payload) => {
-        Object.assign(state[biteName], payload)
-    }) as any, 
+  return Bite<Tg, St, K, RTg>(makeReducer(biteName as string, props.computers) as any, 
     {
         watchScope: props.watchScope,
         instance: 'stable',
@@ -29,4 +26,15 @@ export function biteDerivatives<Tg, St, K extends keyof Tg, RTg>(biteName: K, pr
             comparators: props.comparators,
         }
    } as any);
+}
+
+function makeReducer(biteName: string, computers) {
+    return Object.keys(computers).reduce((pv, key) => {
+        return {
+            ...pv,
+            [key]: (state, payload) => {
+                state[biteName][key] = payload
+            }
+        }
+    }, {})
 }

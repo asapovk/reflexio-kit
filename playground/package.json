@@ -46,7 +46,7 @@
       "@reflexio/bite-routing-v1": "1.0.3-alpha",
       "@reflexio/bite-staging-v1": "1.0.2-alpha",
       "@reflexio/bite-light-controller-v1": "1.0.2-alpha",
-      "@reflexio/bite-derivatives-v1": "1.0.0-alpha",
+      "@reflexio/bite-derivatives-v1": "1.0.8-alpha",
       "@svgr/webpack": "^6.2.1",
       "axios": "^0.27.2",
       "babel-loader": "^8.2.5",

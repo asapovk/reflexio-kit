@@ -13,8 +13,17 @@ import { Button } from '../../../../__shared/_ui/Button';
 
 
 export const UsersPage = () => {
+  const trigger = useTrigger<_ITriggers>('UsersPage');
+  const appState = useReflector<_ITriggers, _IState, _IState>(
+    (state) => state,
+    ['usersComponent']
+  );
   return (<div>
               <div>Users page</div>
+              <div>{appState.users.usersComponent.usersCount}</div>
+              {appState.users.usersComponent.usersList.map(u => 
+                <li key={u.id}>{u.name}</li>
+              )}
         </div>)
 
 

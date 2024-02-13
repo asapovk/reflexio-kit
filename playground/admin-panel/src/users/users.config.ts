@@ -19,7 +19,10 @@ export type IUsersState = {
 }
 
 export type  IUsersComponent  = {
-  usersList: [],
+  usersList: Array<{
+    id: number;
+    name: string;
+  }>,
   usersCount: 0
 }
 
@@ -36,8 +39,8 @@ export type IUsersTriggers = {
     init: null;
   }>;
   usersComponent: BiteStatusWrap<{
-    // init: null;
-    // drop: null;
+    init: null;
+    drop: null;
     usersList: Array<{
       id: number;
       name: string;
@@ -51,19 +54,24 @@ export type IUsersTriggers = {
 
 
 export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState>('users', {
+  //@ts-ignore
   usersComponent: biteDerivatives('usersComponent', {
     computers: {
-        'usersCount': (state: _IState)=> 3,
-        'usersList':  (state: _IState)=> []
+      'usersList':  (opts, state: _IState)=> state.users.loadUsers?.data || [],
+      'usersCount': (opts, state: _IState)=> state.users.usersComponent.usersList.length
       },
-    comparators: {
-      'usersCount': (prev, next) => true,
-      usersList: (prev, next) => true
-    },
-    watchScope: ['loadUsers'],
+    watchScope: ['loadUsers', 'usersController'],
+    // comparators: {
+    //    'usersCount': (opts,prev, next) => false,
+    //    'usersList': (opts,prev, next) => false,
+    //  }
   }),
   usersController: biteLightController('usersController', {
     script: {
+      watch: async(opts, arg) => {
+        console.log(arg.trigger, arg.status)
+      },
+      watchScope: ['usersComponent', 'usersController', 'loadUsers'],
       init: async (opts, pld)=> {
         opts.trigger('createUserForm', 'init', {
           'fieldsOpts': [
@@ -79,6 +87,7 @@ export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState
           },
         })
         console.log('usersControllerInit');
+        opts.trigger('usersComponent', 'init', null);
         const res =  await opts.hook('loadUsers', 'init', 'done', null);
         console.log(res);
       }
