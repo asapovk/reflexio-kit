@@ -52,18 +52,17 @@ export type IUsersTriggers = {
 }
 
 
-
 export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState>('users', {
   usersComponent: biteDerivatives('usersComponent', {
     computers: {
       'usersList':  (state: _IState)=> state.users.loadUsers?.data || [],
       'usersCount': (state: _IState)=> state.users.usersComponent.usersList.length
       },
-    watchScope: ['loadUsers', 'usersController'],
-    // comparators: {
-    //    'usersCount': (opts,prev, next) => false,
-    //    'usersList': (opts,prev, next) => false,
-    //  }
+    watchScope: ['loadUsers'],
+    comparators: {
+       'usersCount': (prev, next) => false,
+       'usersList': (prev, next) => false,
+     }
   }),
   usersController: biteLightController('usersController', {
     script: {
@@ -71,7 +70,7 @@ export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState
         console.log(arg.trigger, arg.status)
       },
       watchScope: ['usersComponent', 'usersController', 'loadUsers'],
-      init: async (opts, pld)=> {
+      init: async (opts, pld) => {
         opts.trigger('createUserForm', 'init', {
           'fieldsOpts': [
             {
