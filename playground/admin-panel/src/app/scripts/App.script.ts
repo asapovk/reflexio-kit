@@ -6,6 +6,14 @@ import {userProfileStages} from '..//stages/users.stage'
 
 const routes = [
     {
+        route: '/users/:paramVal/edit',
+        stages: [
+            userProfileStages.LOAD_USERS(),  
+            userProfileStages.PAGE_USERS(), 
+            userProfileStages.DIALOG_EDIT_USER([0])
+        ]
+    },
+    {
         route: '/users/create',
         stages: [
             userProfileStages.LOAD_USERS(),  
@@ -40,8 +48,9 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
             },
             routes,
         });
-        this.opts.trigger('router', 'goTo', '/users/create');
-        this.opts.trigger('usersController', 'init', null);
+        const href = window.location.href.replace(window.location.origin, '');
+        this.opts.trigger('router', 'goTo', href);
+        //this.opts.trigger('router', 'goTo', '/users');
     }
 
     watch(args: WatchArgsType<_ITriggers, 'appController'>): void {

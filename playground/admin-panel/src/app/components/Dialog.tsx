@@ -16,7 +16,7 @@ export const Dialog = memo(() => {
   );
 
   const onDialogClose = () => {
-    // trigger('dialog', 'clickBackgroud', null);
+    trigger('appController', 'closeDialog', null);
     //trigger('router', 'goTo', '/users')
     // trigger('usersController', 'setState', {
     //   currentUserId: null,
@@ -24,10 +24,14 @@ export const Dialog = memo(() => {
   };
 
   return appState.appController.dialog ? (
-    <div className='popupBackground'>
-      <div className='popupWindow' onClick={onDialogClose}>
+    <div className='dialog-background'>
+      <div className='dialog-layer' onClick={onDialogClose}></div>
+      <div className='dialog-window'>
       {
         appState.appController.dialog?.createUser ? <CreateUserDialog/>: null
+      }
+       {
+        appState.appController.dialog?.editUser ? <CreateUserDialog/>: null
       }
       </div>
     </div>

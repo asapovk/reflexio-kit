@@ -3,29 +3,23 @@ import { _IState, _ITriggers } from '../../_redux/types';
 
 export type OPTS = Opts<_ITriggers, _IState>
 
-export const userProfileStages = {
+export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
   LOAD_USERS: (params?: Array<number>) => ({
     name: 'LOAD_USERS',
     validator: (opt) => {
-    
-      return true
+      return Boolean(opt.getCurrentState().users.usersComponent.usersList.length)
     },
-    notValidHandler: (opt) => {
-
-      return true;
+    notValidHandler: async (opt) => {
+      const res = await opt.hook('usersController', 'init', 'setIsReady', null, 5000);
+      return Boolean(res);
     },
   }),
   PAGE_USERS: (params?: Array<number>) => ({
     name: 'PAGE_USERS',
     assemble: async (opt) => {
-      await new Promise((res, rej)=> {
-        setTimeout(()=> {
           opt.trigger('appController', 'setPage', {
             'users': true
           })
-        res('ok')
-        }, 2000)
-      })
         console.log('asm')
         console.log(opt.getCurrentState().app)
     },
@@ -34,18 +28,24 @@ export const userProfileStages = {
     },
     validator: (opt) => true
   }),
+  DIALOG_EDIT_USER: (params?: Array<number>) => ({
+    name: 'DIALOG_EDIT_USER',
+    assemble: async (opt, {paramVals}) => {
+      const userId = Number(paramVals[params[0]]);
+        opt.trigger('appController', 'setDialog', {
+          'editUser': true
+        });
+    },
+    disassemble: (opt) => {
+        opt.trigger('appController', 'closeDialog', null)
+    }
+  }),
   DIALOG_CREATE_USER: (params?: Array<number>) => ({
     name: 'DIALOG_CREATE_USER',
     assemble: async (opt) => {
-
-      await new Promise((res, rej)=> {
-        setTimeout(()=> {
-          opt.trigger('appController', 'setDialog', {
+        opt.trigger('appController', 'setDialog', {
             'createUser': true
         })
-        res('ok')
-        }, 2000)
-      })
     },
     disassemble: (opt) => {
         opt.trigger('appController', 'closeDialog', null)

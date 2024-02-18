@@ -47,6 +47,7 @@
       "@reflexio/bite-staging-v1": "1.0.2-alpha",
       "@reflexio/bite-light-controller-v1": "1.0.2-alpha",
       "@reflexio/bite-derivatives-v1": "1.0.9-alpha",
+      "@reflexio/bite-event-manager-v1":"1.0.0-alpha",
       "@svgr/webpack": "^6.2.1",
       "axios": "^0.27.2",
       "babel-loader": "^8.2.5",

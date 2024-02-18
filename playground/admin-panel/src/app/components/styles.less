@@ -1,23 +1,43 @@
 
+.page-container {
+    position: relative;
+    left: 10rem;
+    top: 3rem;
+    width: calc(100vw - 10rem);
+}
 
-.popupBackground {
-    z-index: 10000000;
+
+
+.dialog-background {
+    z-index: 10;
     position: absolute;
     width: 100%;
     top: 0;
     left: 0;
     height: 100vh;
-    background-color: black;
-    opacity: 0.7;
     display: flex;
     align-items: center;
     justify-content: center;   
    }
    
-   .popupWindow{
-       z-index: 10000001;
-       width: 500px;
-       height: 500px;
-       padding: 20px;
-       background-color: white;
+   
+   .dialog-layer {
+       position: absolute;
+       width: 100%;
+       top: 0;
+       left: 0;
+       height: 100vh;
+       background-color: black;
+       opacity: 0.5;  
+       z-index: 11;
+   }
+   
+   .dialog-window {
+       z-index: 12;
+    //    width: 500px; //remove
+        max-height: 100vh; //remove
+    //    background-color: c
+       border-radius: 5px;
+       overflow-y: scroll;
+
    }

@@ -1395,6 +1395,11 @@
   resolved "https://registry.npmjs.org/@reflexio/bite-derivatives-v1/-/bite-derivatives-v1-1.0.9-alpha.tgz#6821e237e5f754b195a48cfb31900d17e6819ecd"
   integrity sha512-TgfyQmnx1cW2cRtoTFMHCO5KS4pZCAaD0AJUv7EEjK4R+xSndjTGseUe1f55Ydkrb+D5+XubtHMvD24km/DuWg==
 
+"@reflexio/bite-event-manager-v1@1.0.0-alpha":
+  version "1.0.0-alpha"
+  resolved "https://registry.npmjs.org/@reflexio/bite-event-manager-v1/-/bite-event-manager-v1-1.0.0-alpha.tgz#6f45056280cecf912d4b07bf3b1428eb91353557"
+  integrity sha512-8K/Nr5DADlKGp8jdV3IvGo59q4UQr0ETuZkZmRpWOvLl5jTeLc/l7lyi3JWAxiSq14uSjJ2UPGy1AM6O2f/iMA==
+
 "@reflexio/bite-forms-v1@1.0.3-alpha":
   version "1.0.3-alpha"
   resolved "https://registry.npmjs.org/@reflexio/bite-forms-v1/-/bite-forms-v1-1.0.3-alpha.tgz#d31ade596b35955789d1d96b4fcf65ed4c7d088b"

@@ -5,6 +5,8 @@ import { useReflector } from '@reflexio/react-v1/lib/useReflector';
 import { _IState, _ITriggers } from '../../_redux/types';
 import { UsersPage } from '../../users/components/UsersPage';
 import { Dialog } from './Dialog';
+import {Sidebar} from './Sidebar'
+
 
 export const AppContainer = () => {
   const trigger = useTrigger<_ITriggers>('AppContainer');
@@ -21,8 +23,11 @@ export const AppContainer = () => {
   console.log('render');
   console.log(appState);
   return (
-    <div className='app-container'>
+    <div>
+      <Sidebar/>
+      <div className='page-container'>
       {currentPage.users ? <UsersPage /> : null}
+      </div>
       <Dialog/>
     </div>
   );

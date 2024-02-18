@@ -12,17 +12,28 @@ import {biteDerivatives} from '@reflexio/bite-derivatives-v1'
 
 //import { biteStaging } from '../../../../packages/bite-staging-v1/lib/index';
 
+export interface IUserRow {
+  userId: number;
+  name: string;
+  email: string;
+  group: string;
+  groupId: number;
+  plan: string;
+}
+
+
 export type IUsersState = {
   loadUsers: AsyncState<null, Array<any>>
   createUserForm?: IFormState; 
   usersComponent: IUsersComponent
+  usersController?: {
+    currentUser?: IUserRow;
+    isReady: boolean;
+  }
 }
 
 export type  IUsersComponent  = {
-  usersList: Array<{
-    id: number;
-    name: string;
-  }>,
+  usersList: Array<IUserRow>,
   usersCount: 0
 }
 
@@ -37,14 +48,13 @@ export const usersInitialState: IUsersState = {
 export type IUsersTriggers = {
   usersController: BiteStatusWrap<{
     init: null;
+    setCurrentUser: IUserRow;
+    setIsReady: boolean;
   }>;
   usersComponent: BiteStatusWrap<{
     init: null;
     drop: null;
-    usersList: Array<{
-      id: number;
-      name: string;
-    }>,
+    usersList: Array<IUserRow>,
     usersCount: number
   }>;
   loadUsers: BiteStatusWrap<AsyncTrigger<null, Array<any>>>
@@ -57,12 +67,12 @@ export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState
     computers: {
       'usersList':  (state: _IState)=> state.users.loadUsers?.data || [],
       'usersCount': (state: _IState)=> state.users.usersComponent.usersList.length
-      },
+    },
     watchScope: ['loadUsers'],
-    comparators: {
-       'usersCount': (prev, next) => false,
-       'usersList': (prev, next) => false,
-     }
+    // comparators: {
+    //    'usersCount': (prev, next) => false,
+    //    'usersList': (prev, next) => false,
+    //  }
   }),
   usersController: biteLightController('usersController', {
     script: {
@@ -71,23 +81,29 @@ export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState
       },
       watchScope: ['usersComponent', 'usersController', 'loadUsers'],
       init: async (opts, pld) => {
-        opts.trigger('createUserForm', 'init', {
-          'fieldsOpts': [
-            {
-              'name': 'username',
-              'initialValue': 'Ivan',
-              validators: [],
-              sync: true,
-            },
-          ],
-          onSubmit(fst, ut) {
-            console.log(fst);
-          },
-        })
-        console.log('usersControllerInit');
         opts.trigger('usersComponent', 'init', null);
         const res =  await opts.hook('loadUsers', 'init', 'done', null);
-        console.log(res);
+        if(res.data) {
+          console.log('res.data', res.data)
+          opts.setStatus('setIsReady', true)
+        }
+        // opts.trigger('createUserForm', 'init', {
+        //   'fieldsOpts': [
+        //     {
+        //       'name': 'username',
+        //       'initialValue': 'Ivan',
+        //       validators: [],
+        //       sync: true,
+        //     },
+        //   ],
+        //   onSubmit(fst, ut) {
+        //     console.log(fst);
+        //   },
+        // })
+        // console.log('usersControllerInit');
+        // opts.trigger('usersComponent', 'init', null);
+        
+        // console.log(res);
       }
     }
   }),
