@@ -20,8 +20,6 @@ export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
           opt.trigger('appController', 'setPage', {
             'users': true
           })
-        console.log('asm')
-        console.log(opt.getCurrentState().app)
     },
     disassemble: (opt) => {
  
@@ -46,8 +44,14 @@ export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
         opt.trigger('appController', 'setDialog', {
             'createUser': true
         })
+        opt.trigger('eventManager', 'forward', {
+          'from': {'appController': 'closeDialog'},
+          'to': {'router': 'goBack'}
+        })
+        //bindCloseDialog to router goBack
     },
     disassemble: (opt) => {
+        //unbindCloseDialog from router
         opt.trigger('appController', 'closeDialog', null)
     }
   }),

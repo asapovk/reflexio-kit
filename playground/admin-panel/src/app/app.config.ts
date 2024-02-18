@@ -12,6 +12,10 @@ import { AppScript } from './scripts/App.script';
 import { biteStaging } from '@reflexio/bite-staging-v1';
 import {biteAsync, asyncInitialState} from  '@reflexio/bite-async-v1' //'../../../../packages/bite-async-v1/lib/index';
 import {AsyncState, AsyncTrigger} from '@reflexio/bite-async-v1/lib/types' //'../../../../packages/bite-async-v1/lib/types';
+import { biteEventManager } from '@reflexio/bite-event-manager-v1';
+import { IEventManagerTriggers } from '@reflexio/bite-event-manager-v1/lib/types';
+import { IUsersTriggers } from '../users/users.config';
+
 //import { biteStaging } from '../../../../packages/bite-staging-v1/lib/index';
 
 
@@ -62,6 +66,7 @@ export type IAppTriggers = {
   }>;
   router: BiteStatusWrap<IRouterTriggers>;
   stager: BiteStatusWrap<IStagingTriggers<_ITriggers, _IState>>;
+  eventManager: BiteStatusWrap<IEventManagerTriggers<IUsersTriggers, _IState>>;
 }
 
 
@@ -94,5 +99,8 @@ export const appControllerBite
 export const appSlice = Slice<IAppTriggers, IAppState, _ITriggers, _IState>('app', {
   'appController': appControllerBite,
   'router': biteRouting('router'),
-  'stager': biteStaging('stager')
+  'stager': biteStaging('stager'),
+  eventManager: biteEventManager('eventManager', {
+    watchScope: [],
+  }),
 }, appInitialState)
