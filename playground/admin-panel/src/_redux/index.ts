@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose, Middleware, combineReducers } fr
 import { appSlice } from '../app/app.config';
 import { loadUsers } from '../_utils/loadUsers.dev';
 import { usersSlice } from '../users/users.config';
+import { eventManagerSlice } from '../app/event-manager.comfig';
 
 usersSlice.inject({
   loadUsers: loadUsers
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
 
 function configureStore() {
   const middlewares: Middleware[] = [
+    eventManagerSlice.middleware,
     appSlice.middleware,
     usersSlice.middleware
   ];

@@ -19,9 +19,7 @@ export const AppContainer = () => {
 
   const currentPage = appState.app.appController.page;
   const sideBar = appState.app.appController.sideBar;
-  console.log(currentPage);
-  console.log('render');
-  console.log(appState);
+
   return (
     <div>
       <Sidebar/>

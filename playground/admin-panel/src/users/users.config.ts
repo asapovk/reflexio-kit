@@ -49,43 +49,53 @@ export type IUsersTriggers = {
   usersController: BiteStatusWrap<{
     init: null;
     setCurrentUser: IUserRow;
+    setUsersList: Array<IUserRow>;
     setIsReady: boolean;
   }>;
-  usersComponent: BiteStatusWrap<{
-    init: null;
-    drop: null;
-    usersList: Array<IUserRow>,
-    usersCount: number
-  }>;
+  // usersComponent: BiteStatusWrap<{
+  //   init: null;
+  //   drop: null;
+  //   usersList: Array<IUserRow>,
+  //   usersCount: number
+  // }>;
   loadUsers: BiteStatusWrap<AsyncTrigger<null, Array<any>>>
   createUserForm: BiteStatusWrap<IFormBiteTriggers>
 }
 
 
 export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState>('users', {
-  usersComponent: biteDerivatives('usersComponent', {
-    computers: {
-      'usersList':  (state: _IState)=> state.users.loadUsers?.data || [],
-      'usersCount': (state: _IState)=> state.users.usersComponent.usersList.length
-    },
-    watchScope: ['loadUsers'],
-    // comparators: {
-    //    'usersCount': (prev, next) => false,
-    //    'usersList': (prev, next) => false,
-    //  }
-  }),
+  // usersComponent: biteDerivatives('usersComponent', {
+  //   computers: {
+  //     'usersList':  (state: _IState)=> state.users.loadUsers?.data || [],
+  //     'usersCount': (state: _IState)=> state.users.usersComponent.usersList.length
+  //   },
+  //   watchScope: ['loadUsers'],
+  //   // comparators: {
+  //   //    'usersCount': (prev, next) => false,
+  //   //    'usersList': (prev, next) => false,
+  //   //  }
+  // }),
   usersController: biteLightController('usersController', {
-    script: {
-      watch: async(opts, arg) => {
-        console.log(arg.trigger, arg.status)
+    reducer: {
+      setUsersList(state: IUsersState, payload){
+        state.usersComponent.usersList = payload;
       },
-      watchScope: ['usersComponent', 'usersController', 'loadUsers'],
+      setIsReady: null,
+      'init': null,
+      setCurrentUser(state: IUsersState, payload) {
+        if(state.usersController) {
+          state.usersController.currentUser = payload
+        }
+      },
+    },
+    script: {
+      watchScope: ['usersController'],
       init: async (opts, pld) => {
-        opts.trigger('usersComponent', 'init', null);
         const res =  await opts.hook('loadUsers', 'init', 'done', null);
         if(res.data) {
-          console.log('res.data', res.data)
+          opts.setStatus('setUsersList', res.data);
           opts.setStatus('setIsReady', true)
+          //opts.trigger('usersComponent', 's')
         }
         // opts.trigger('createUserForm', 'init', {
         //   'fieldsOpts': [
@@ -112,7 +122,6 @@ export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState
     pr: (opt, input) => opt.injected.loadUsers(),
     timeout: 5000,
     errorCatcher: (opt, err) => {
-      console.log('errorCatcher', err)
       return true
     }
   })

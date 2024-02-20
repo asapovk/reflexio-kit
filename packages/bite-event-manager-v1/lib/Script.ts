@@ -17,14 +17,14 @@ export class EventManagerScript  {
     return {trigger, status}
   }
 
-  private handleForward({from, to}) {
+  private handleForward({from, to, payload}) {
     const triggerAndStatusFrom = this.getActionTypeFromMap(from);
     const triggerAndStatusTo = this.getActionTypeFromMap(to);
     const eventName = getActionType(triggerAndStatusFrom.trigger, triggerAndStatusFrom.status);
     if(this.forwardMap[eventName]) {
         delete this.forwardMap[eventName]
     }
-    this.forwardMap[eventName] = triggerAndStatusTo
+    this.forwardMap[eventName] = {...triggerAndStatusTo, payload}
   }
 
   private handleMute(eventName) {
@@ -47,7 +47,8 @@ export class EventManagerScript  {
     }
     if(this.forwardMap[eventName]) {
         const triggerAndStatus = this.forwardMap[eventName];
-        this.opts.trigger(triggerAndStatus.trigger, triggerAndStatus.status, watchArgs.payload)
+        const ownPayload = typeof triggerAndStatus.payload !== 'undefined';
+        this.opts.trigger(triggerAndStatus.trigger, triggerAndStatus.status, ownPayload ? triggerAndStatus.payload : watchArgs.payload)
     }
   }
 
@@ -56,19 +57,21 @@ export class EventManagerScript  {
         return this.handleExternalEvent(args)
     }
     const forwardEvent = this.opts.catchStatus('forward', args);
-    if(forwardEvent.idCatched) {
+    if(forwardEvent.isCatched) {
         const payload = forwardEvent.payload;
         return this.handleForward(payload);
     }
     const muteEvent = this.opts.catchStatus('mute', args);
-    if(muteEvent.idCatched) {
+    if(muteEvent.isCatched) {
         const payload = muteEvent.payload;
         return this.handleMute(payload);
     }
     const unbindEvent = this.opts.catchStatus('unbind', args);
-    if(unbindEvent.idCatched) {
+    if(unbindEvent.isCatched) {
         const payload = unbindEvent.payload;
-        return this.handleUnbind(payload);
+        const triggerAndStatusFrom = this.getActionTypeFromMap(payload);
+        const actionType = getActionType(triggerAndStatusFrom.trigger, triggerAndStatusFrom.status);
+        return this.handleUnbind(actionType);
     }
   }
 }

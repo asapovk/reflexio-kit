@@ -4,22 +4,11 @@ export class ComputedScript {
 
     constructor(private opts) {}
 
-    async init(payload) {}
+    private subscribtion = null;
+    
 
-    private defaultComparator(prevVal, nextVal) {
-       return prevVal !== nextVal
-    }
-
-    async watch(args) {
-        const dropEvent = this.opts.catchStatus('drop', args);
-        if(dropEvent.isCatched) {
-            this.opts.drop();
-        }
-        const initEvent = this.opts.catchStatus('init', args);
-        if(initEvent.isCatched) {
-            return;
-        }
-        setTimeout(()=> {
+    async init(payload) {
+    this.subscribtion = this.opts.subscribe(() => {
             const state = this.opts.getCurrentState();
             const computers = this.opts.addOpts.computers;
             const comparators = this.opts.addOpts.comparators || {};
@@ -37,6 +26,24 @@ export class ComputedScript {
                 }
             })
         })
+    }
+
+    private defaultComparator(prevVal, nextVal) {
+       return prevVal !== nextVal
+    }
+
+    async watch(args) {
+        const dropEvent = this.opts.catchStatus('drop', args);
+        if(dropEvent.isCatched) {
+            if(this.subscribtion) {
+                this.subscribtion()
+            }
+            this.opts.drop();
+        }
+        const initEvent = this.opts.catchStatus('init', args);
+        if(initEvent.isCatched) {
+            return;
+        }
     }
 
 }

@@ -23,7 +23,7 @@ export type IEMTriggers = {
 }
 
 
-export const appSlice = Slice<IEMTriggers, null, _ITriggers, _IState>('eventManager', {
+export const eventManagerSlice = Slice<IEMTriggers, null, _ITriggers, _IState>('eventManager', {
   eventManager: biteEventManager('eventManager', {
     watchScope: [],
   }),

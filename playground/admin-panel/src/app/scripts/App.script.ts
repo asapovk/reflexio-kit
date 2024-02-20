@@ -37,9 +37,11 @@ export class AppScript extends Script<_ITriggers, _IState, 'appController', 'ini
     constructor(opts) {
         super()
         this.opts = opts;
+        console.log(opts);
     }
 
     async init(args: null): Promise<void> {
+        this.opts.trigger('eventManager', 'init', null);
         this.opts.trigger('router', 'init', null);
         this.opts.trigger('stager', 'init', {
             'failHandler': (opt) => {

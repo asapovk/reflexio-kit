@@ -5,9 +5,10 @@ export type IEventManagerTriggers<Tr, St> = {
     init: null;
     drop: null;
     forward: {
-        from: Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>;
-        to: Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>;
+        from: Partial<Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>>;
+        to: Partial<Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>>;
+        payload?: any;
     }
-    mute: Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>;
-    unbind: Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>;
+    mute: Partial<Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>>;
+    unbind: Partial<Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>>;
 }

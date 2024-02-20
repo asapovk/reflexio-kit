@@ -1390,15 +1390,15 @@
   resolved "https://registry.npmjs.org/@reflexio/bite-async-v1/-/bite-async-v1-1.0.1-alpha.tgz#ae053f2427e02bd6744030f7981b264e460d0d3b"
   integrity sha512-Wc+q8sD4jCIZ76AomgX6WwJXIKgVCmaBaf/adOZage894xy9YCqJvMcyjJytXX+uTUR+juDUt7quYkSxgpNk0A==
 
-"@reflexio/bite-derivatives-v1@1.0.9-alpha":
-  version "1.0.9-alpha"
-  resolved "https://registry.npmjs.org/@reflexio/bite-derivatives-v1/-/bite-derivatives-v1-1.0.9-alpha.tgz#6821e237e5f754b195a48cfb31900d17e6819ecd"
-  integrity sha512-TgfyQmnx1cW2cRtoTFMHCO5KS4pZCAaD0AJUv7EEjK4R+xSndjTGseUe1f55Ydkrb+D5+XubtHMvD24km/DuWg==
+"@reflexio/bite-derivatives-v1@1.1.9-alpha":
+  version "1.1.9-alpha"
+  resolved "https://registry.npmjs.org/@reflexio/bite-derivatives-v1/-/bite-derivatives-v1-1.1.9-alpha.tgz#4f8c83a009817504ee940efe9b338ac07206265a"
+  integrity sha512-1KRHWmVD2gPh3h8a9yW+Fl7sYUyD1QvOL6zUP8nd9hTpECFcEF+/LPmrWrOi+FOtvSE4tdImBfnszUSWpnFjcQ==
 
-"@reflexio/bite-event-manager-v1@1.0.0-alpha":
-  version "1.0.0-alpha"
-  resolved "https://registry.npmjs.org/@reflexio/bite-event-manager-v1/-/bite-event-manager-v1-1.0.0-alpha.tgz#6f45056280cecf912d4b07bf3b1428eb91353557"
-  integrity sha512-8K/Nr5DADlKGp8jdV3IvGo59q4UQr0ETuZkZmRpWOvLl5jTeLc/l7lyi3JWAxiSq14uSjJ2UPGy1AM6O2f/iMA==
+"@reflexio/bite-event-manager-v1@1.0.2-alpha":
+  version "1.0.2-alpha"
+  resolved "https://registry.npmjs.org/@reflexio/bite-event-manager-v1/-/bite-event-manager-v1-1.0.2-alpha.tgz#eb8c8dc47e69070ae7b472ecedc0571ddb72def6"
+  integrity sha512-xpGgXBD3D2jr7KsosKSkWeLx7gP2oTFpa1lDfwPDMJZlo12amiSGgnkECQ2+q3m2uxSped5En3XjTBjcWhVtlg==
 
 "@reflexio/bite-forms-v1@1.0.3-alpha":
   version "1.0.3-alpha"
@@ -1420,10 +1420,10 @@
   resolved "https://registry.npmjs.org/@reflexio/bite-staging-v1/-/bite-staging-v1-1.0.2-alpha.tgz#ebcd57aebfe61e5ed8f30d2eed4ecc633f38f98d"
   integrity sha512-uVH/jR3azpvZFg06dTcZTG2XlFk4GQGS5/hViRhRpC1mR+QmAIQZLiT7k8+zR43owBPoBVdqpDbfvB4V9+nPxg==
 
-"@reflexio/core-v1@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@reflexio/core-v1/-/core-v1-1.1.1.tgz#e80e0ea392f53d83ad95af0ad51fb831345254e1"
-  integrity sha512-jOQ4qGKsNMH7l75xOL+tGOy6PWCym/znNWFH1t+X/as9iJVUbOysTksgXQs8JG4CxTl74ihL1zUE/MJAzDi6/w==
+"@reflexio/core-v1@1.2.4":
+  version "1.2.4"
+  resolved "https://registry.npmjs.org/@reflexio/core-v1/-/core-v1-1.2.4.tgz#f728215ae1928dbadcc5b829bb78c89e23e821a8"
+  integrity sha512-RfuNDzrZjaiC3YFhrp0jKZoP0f4zqY5gUEYpmmU7UA+ouvo70qeCOgeqYfqw5fnAewJhjBy5v/EXmzzcJPD62g==
 
 "@reflexio/react-v1@^1.1.4":
   version "1.1.5"

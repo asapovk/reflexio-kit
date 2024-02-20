@@ -61,9 +61,10 @@ export const UsersPage = () => {
   const trigger = useTrigger<_ITriggers>('UsersPage');
   const appState = useReflector<_ITriggers, _IState, _IState>(
     (state) => state,
-    ['usersComponent']
+    ['appController']
   );
   const list = appState.users.usersComponent.usersList;
+  console.log('render list', list);
   return (<div className='users-table'>
               <UsersTableHeader/>  
               {list.map(u => 

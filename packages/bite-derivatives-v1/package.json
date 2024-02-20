@@ -1,6 +1,6 @@
 {
     "name": "@reflexio/bite-derivatives-v1",
-    "version": "1.0.9-alpha",
+    "version": "1.1.9-alpha",
     "description": "Reflexio bite-derivatives-v1 package",
     "files": ["lib", "index.d.ts", "readme.md"],
     "keywords": ["react", "redux"],

@@ -7,24 +7,23 @@ export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
   LOAD_USERS: (params?: Array<number>) => ({
     name: 'LOAD_USERS',
     validator: (opt) => {
-      return Boolean(opt.getCurrentState().users.usersComponent.usersList.length)
+      return false //Boolean(opt.getCurrentState().users.usersComponent.usersList.length)
     },
     notValidHandler: async (opt) => {
       const res = await opt.hook('usersController', 'init', 'setIsReady', null, 5000);
+      console.log(opt.getCurrentState().users.loadUsers.data)
       return Boolean(res);
     },
   }),
   PAGE_USERS: (params?: Array<number>) => ({
     name: 'PAGE_USERS',
     assemble: async (opt) => {
+          const data = opt.getCurrentState().users.loadUsers.data;
+          opt.trigger('usersController', 'setUsersList', data);
           opt.trigger('appController', 'setPage', {
             'users': true
           })
     },
-    disassemble: (opt) => {
- 
-    },
-    validator: (opt) => true
   }),
   DIALOG_EDIT_USER: (params?: Array<number>) => ({
     name: 'DIALOG_EDIT_USER',
@@ -33,9 +32,15 @@ export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
         opt.trigger('appController', 'setDialog', {
           'editUser': true
         });
+        opt.trigger('eventManager', 'forward', {
+          'from': {'appController': 'closeDialog'},
+          'to': {'router': 'goTo'},
+          payload: '/users',
+        })
     },
     disassemble: (opt) => {
-        opt.trigger('appController', 'closeDialog', null)
+      opt.trigger('eventManager', 'unbind', {'appController': 'closeDialog'})
+      opt.trigger('appController', 'closeDialog', null)
     }
   }),
   DIALOG_CREATE_USER: (params?: Array<number>) => ({
@@ -46,12 +51,12 @@ export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
         })
         opt.trigger('eventManager', 'forward', {
           'from': {'appController': 'closeDialog'},
-          'to': {'router': 'goBack'}
+          'to': {'router': 'goTo'},
+          payload: '/users',
         })
-        //bindCloseDialog to router goBack
     },
     disassemble: (opt) => {
-        //unbindCloseDialog from router
+        opt.trigger('eventManager', 'unbind', {'appController': 'closeDialog'})
         opt.trigger('appController', 'closeDialog', null)
     }
   }),
