@@ -7,11 +7,10 @@ export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
   LOAD_USERS: (params?: Array<number>) => ({
     name: 'LOAD_USERS',
     validator: (opt) => {
-      return false //Boolean(opt.getCurrentState().users.usersComponent.usersList.length)
+      return Boolean(opt.getCurrentState().users.usersComponent.usersList.length)
     },
     notValidHandler: async (opt) => {
       const res = await opt.hook('usersController', 'init', 'setIsReady', null, 5000);
-      console.log(opt.getCurrentState().users.loadUsers.data)
       return Boolean(res);
     },
   }),

@@ -13,6 +13,7 @@ import { Flexbox } from '../../../../__shared/_ui/Flexbox';
 import { Block } from '../../../../__shared/_ui/Block';
 import { Text } from '../../../../__shared/_ui/Text';
 import '../styles/users-table.less';
+import { Button } from '../../../../__shared/_ui/Button';
 
 
 export const UsersTableHeader = () => {
@@ -64,15 +65,20 @@ export const UsersPage = () => {
     ['appController']
   );
   const list = appState.users.usersComponent.usersList;
-  console.log('render list', list);
-  return (<div className='users-table'>
+  return (<div>
+          <div className='users-page-header'>
+            <Button onClick={() => trigger('router', 'goTo', `/users/create`)}>Создать</Button>
+          </div>
+          <div className='users-table'>
               <UsersTableHeader/>  
               {list.map(u => 
                     <UsersTableRow onClick={() => 
                       trigger('router', 'goTo', `/users/${u.userId}/edit`)
                     } key={u.userId} user={u} />
               )}
-        </div>)
+        </div>
+        </div>
+        )
 
 
 };
