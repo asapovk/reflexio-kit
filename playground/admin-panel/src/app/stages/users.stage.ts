@@ -45,6 +45,7 @@ export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
   DIALOG_CREATE_USER: (params?: Array<number>) => ({
     name: 'DIALOG_CREATE_USER',
     assemble: async (opt) => {
+        opt.trigger('usersController', 'openCreateUserForm', null);
         opt.trigger('appController', 'setDialog', {
             'createUser': true
         })
@@ -57,6 +58,7 @@ export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
     disassemble: (opt) => {
         opt.trigger('eventManager', 'unbind', {'appController': 'closeDialog'})
         opt.trigger('appController', 'closeDialog', null)
+        opt.trigger('createUserForm', 'dropForm', null);
     }
   }),
 };

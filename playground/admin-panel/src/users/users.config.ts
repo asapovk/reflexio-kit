@@ -51,6 +51,7 @@ export type IUsersTriggers = {
     setCurrentUser: IUserRow;
     setUsersList: Array<IUserRow>;
     setIsReady: boolean;
+    openCreateUserForm: null;
   }>;
   // usersComponent: BiteStatusWrap<{
   //   init: null;
@@ -62,6 +63,8 @@ export type IUsersTriggers = {
   createUserForm: BiteStatusWrap<IFormBiteTriggers>
 }
 
+
+//form1 => form 2 form 3 onFail => back
 
 export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState>('users', {
   // usersComponent: biteDerivatives('usersComponent', {
@@ -80,8 +83,9 @@ export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState
       setUsersList(state: IUsersState, payload){
         state.usersComponent.usersList = payload;
       },
+      openCreateUserForm: null,
       setIsReady: null,
-      'init': null,
+      init: null,
       setCurrentUser(state: IUsersState, payload) {
         if(state.usersController) {
           state.usersController.currentUser = payload
@@ -90,30 +94,31 @@ export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState
     },
     script: {
       watchScope: ['usersController'],
+      watch: async (opt, pld) => {
+        const openCreateForm =  opt.catchStatus('openCreateUserForm', pld)
+        if(openCreateForm.isCatched) {
+          opt.trigger('createUserForm', 'init', {
+            'fieldsOpts': [
+              {
+                'name': 'username',
+                'initialValue': 'Ivan',
+                validators: [],
+                sync: true,
+              },
+            ],
+            onSubmit(fst, ut) {
+              console.log('submit')
+              //opt.trigger('')
+            },
+          })
+        }
+      },
       init: async (opts, pld) => {
         const res =  await opts.hook('loadUsers', 'init', 'done', null);
         if(res.data) {
           opts.setStatus('setUsersList', res.data);
           opts.setStatus('setIsReady', true)
-          //opts.trigger('usersComponent', 's')
         }
-        // opts.trigger('createUserForm', 'init', {
-        //   'fieldsOpts': [
-        //     {
-        //       'name': 'username',
-        //       'initialValue': 'Ivan',
-        //       validators: [],
-        //       sync: true,
-        //     },
-        //   ],
-        //   onSubmit(fst, ut) {
-        //     console.log(fst);
-        //   },
-        // })
-        // console.log('usersControllerInit');
-        // opts.trigger('usersComponent', 'init', null);
-        
-        // console.log(res);
       }
     }
   }),

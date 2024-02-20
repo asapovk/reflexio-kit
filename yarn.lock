@@ -9,10 +9,10 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@reflexio/core-v1@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@reflexio/core-v1/-/core-v1-1.1.0.tgz#d9493ec3a60d11eb9382dcc315446de782e93ab4"
-  integrity sha512-4RXw1W2sC6qVj9XIMPDxtGM+WKvrBekqNOe/J+cVtG85w2DNlL06b/xsJtWWf5s/m7ZbHgtjC/fiwmzyq6U4Mg==
+"@reflexio/core-v1@^1.1.1":
+  version "1.2.4"
+  resolved "https://registry.npmjs.org/@reflexio/core-v1/-/core-v1-1.2.4.tgz#f728215ae1928dbadcc5b829bb78c89e23e821a8"
+  integrity sha512-RfuNDzrZjaiC3YFhrp0jKZoP0f4zqY5gUEYpmmU7UA+ouvo70qeCOgeqYfqw5fnAewJhjBy5v/EXmzzcJPD62g==
 
 "@reflexio/react-v1@^1.1.5":
   version "1.1.5"
