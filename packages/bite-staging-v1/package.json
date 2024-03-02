@@ -1,6 +1,6 @@
 {
     "name": "@reflexio/bite-staging-v1",
-    "version": "1.0.4-alpha",
+    "version": "1.0.5-alpha",
     "description": "Reflexio bite-staging-v1 package",
     "files": ["lib", "index.d.ts", "readme.md"],
     "keywords": ["react", "redux"],

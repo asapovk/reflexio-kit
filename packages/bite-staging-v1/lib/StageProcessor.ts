@@ -92,9 +92,14 @@ export class StageProcessor<O> {
 
       return true;
     } else {
-      return stage.notValidHandler
-        ? await stage.notValidHandler(this.opts.opt, this.curPath)
-        : stage;
+      if(stage.notValidHandler) {
+        const res = await stage.notValidHandler(this.opts.opt, this.curPath);
+        if(res) {
+          return true
+        }
+      }
+      return stage
+
     }
   }
 
@@ -108,7 +113,7 @@ export class StageProcessor<O> {
   public async process() {
     while (this.stagesQueue.length) {
       const result: any = await this.processStage();
-      if (!result || result.onFail) {
+      if (result !== true) {
         this.reset();
         if(result.onFail) {
           await result.onFail(this.opts.opt);
