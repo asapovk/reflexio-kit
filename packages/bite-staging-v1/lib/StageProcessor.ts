@@ -29,8 +29,10 @@ export class StageProcessor<O> {
   constructor(private opts: StageProcessorOpts<O>) {
     this.routesMap = this.makeMap(this.opts.routes);
   }
+  private inProgress: boolean = false;
 
   public async go(destination: string) {
+    this.inProgress = true;
     const path = this.validatePath(destination);
     if (!path) {
       this.opts.failHandler(this.opts.opt);
@@ -56,9 +58,11 @@ export class StageProcessor<O> {
     const curPathPattern = this.curPath?.pathTemplate || '/';
     const found = this.opts.routes.find((r) => r.route === curPathPattern);
     if (!found) {
-      throw Error(
-        `Not found route for ${curPathPattern}. Invalid routes map or patterns`
-      );
+      this.inProgress = false;
+       this.opts.failHandler(this.opts.opt);
+      // throw Error(
+      //   `Not found route for ${curPathPattern}. Invalid routes map or patterns`
+      // );
     }
 
     return found;
@@ -76,7 +80,7 @@ export class StageProcessor<O> {
     return filterdPrevStagesQueue.reverse();
   }
 
-  private async processStage(): Promise<boolean> {
+  private async processStage(): Promise<boolean | Stage<O>> {
     const stage = this.stagesQueue.shift();
     const isValid = stage.validator
       ? stage.validator(this.opts.opt, this.curPath)
@@ -90,7 +94,7 @@ export class StageProcessor<O> {
     } else {
       return stage.notValidHandler
         ? await stage.notValidHandler(this.opts.opt, this.curPath)
-        : false;
+        : stage;
     }
   }
 
@@ -103,10 +107,15 @@ export class StageProcessor<O> {
   
   public async process() {
     while (this.stagesQueue.length) {
-      const result = await this.processStage();
-      if (!result) {
+      const result: any = await this.processStage();
+      if (!result || result.onFail) {
         this.reset();
-        await this.opts.failHandler(this.opts.opt);
+        if(result.onFail) {
+          await result.onFail(this.opts.opt);
+        }
+        else {
+          await this.opts.failHandler(this.opts.opt);
+        }
         break;
       }
     }

@@ -29,7 +29,10 @@ export interface Stage<O> {
     opt: O,
     path: { paramVals: Array<string>; pathTemplate: string } | null
   ) => void; //works when off the stage
-  //Does operations itselfs or/and asks for user actions;
+  onFail?: (
+    opt: O,
+    path: { paramVals: Array<string>; pathTemplate: string } | null
+  ) => Promise<void> | void; 
 }
 
 export interface StageProcessorOpts<Opts> {
