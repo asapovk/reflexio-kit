@@ -8,7 +8,11 @@ import { FormPageControllerScript } from './script/FormPageController.script';
 
 
 export type IFormPageState = {
-    dynamicForm: IFormState
+    dynamicForm: IFormState;
+    formRows: Array<{
+      name: string;
+      isRemovable: boolean;
+    }>
 }
 
 
@@ -16,6 +20,9 @@ export type IFormPageTriggers = {
     formPageController: BiteStatusWrap<{
     init: null;
     drop: null;
+    addFormRow: null;
+    deleteFormRow: {name: string};
+    setFormRows: IFormPageState['formRows']
   }>;
   dynamicForm: BiteStatusWrap<IFormBiteTriggers>
 }
@@ -24,7 +31,14 @@ export type IFormPageTriggers = {
 export const formPageBite 
     = Bite<IFormPageTriggers, {}, 'formPageController', _ITriggers>({
   'init': null,
-    drop: null
+    drop(state: IFormPageState, payload) {
+      state.formRows = []
+    },
+    setFormRows(state: IFormPageState, payload) {
+      state.formRows = payload;
+    },
+    addFormRow: null,
+    deleteFormRow: null,
 }, {
   script: FormPageControllerScript,
   'instance': 'stable',
@@ -36,4 +50,4 @@ export const formPageSlice = Slice<IFormPageTriggers, IFormPageState, _ITriggers
   'dynamicForm': biteForms('dynamicForm'),
   formPageController: formPageBite,
   },
-{dynamicForm: null});
+{dynamicForm: null, formRows: []});

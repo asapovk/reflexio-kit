@@ -5,6 +5,9 @@ import { useReflector } from '@reflexio/react-v1/lib/useReflector';
 import { _IState, _ITriggers } from '../../_redux/types';
 import { Button } from '../../../../__shared/_ui/Button';
 import { TextInput } from '../../../../__shared/_ui/Input';
+import { Select } from '../../../../__shared/_ui/Select';
+import '../styles.less';
+import { Trash } from '../../../../__shared/_ui/Svg/Trash';
 
 export const FormPage = () => {
   const trigger = useTrigger<_ITriggers>('FormPage');
@@ -12,22 +15,46 @@ export const FormPage = () => {
     (state) => state,
     ['dynamicForm', 'formPageController']
   );
-  const currentPage = appState.app.appController.page;
-  const sideBar = appState.app.appController.sideBar;
 
   const fieldsObject = appState.formPage.dynamicForm.fields;
-  const inputFields = Object.keys(fieldsObject);
+  const rows = appState.formPage.formRows;
+  console.log('fieldsObject', fieldsObject);
 
   return (
     <div>
         <div>Form page</div>
-        <Button onClick={() => trigger('dynamicForm', 'addField',{
-            'name': 'added',
-            sync: true,
-            'initialValue': 'Two',
-            'validators': []
-        })}>Добавить</Button>
-        {inputFields.map( (f, i) => <TextInput value={fieldsObject[f].value} key={i}/>)}
+        <Button onClick={() => trigger('formPageController', 'addFormRow', null)}>Добавить</Button>
+        <div className='dynamic-form'>
+        {rows.map( (r, i) => 
+        (<div className='dynamic-form-row'    key={r.name}>
+            <div className='dynamic-form-row-item'>
+            <Select 
+            opts={fieldsObject[`row_selector_${r.name}`].meta}
+            defaultValue={fieldsObject[`row_selector_${r.name}`].value}
+            onChange={(val) => trigger('dynamicForm', 'typeField', {
+                fieldName: `row_selector_${r.name}`,
+                'value': val
+            })}
+            />
+            </div>
+            <div className='dynamic-form-row-item'>
+            <TextInput 
+            onChange={(e) => trigger('dynamicForm', 'typeField', {
+                'fieldName': `row_text_${r.name}`,
+                value: e.target.value
+            }) } 
+            value={fieldsObject[`row_text_${r.name}`].meta}
+            />
+            </div>
+            <div className='dynamic-form-row-item'>
+            {r.isRemovable ? 
+                <Trash color={'error'} onClick={() => trigger('formPageController', 'deleteFormRow', {
+                    name: r.name
+                })}/>
+            :null}
+            </div>
+        </div>))}
+        </div>
     </div>
   );
 };

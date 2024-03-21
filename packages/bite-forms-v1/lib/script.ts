@@ -115,6 +115,10 @@ export class FormsScript<RT, RS> {
       delete this.formActualState.fields[fieldName];
       const disabled = this.isSubmitDisabled(this.formActualState, this.touched);
       this.formActualState.isSubmitDisabled = disabled;
+      this.opts.setStatus(
+        'setFormState',
+        JSON.parse(JSON.stringify(this.formActualState))
+      );
     }
 
     const formState: IFormState =
