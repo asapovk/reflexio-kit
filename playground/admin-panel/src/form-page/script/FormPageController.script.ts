@@ -60,9 +60,7 @@ export class FormPageControllerScript extends Script<_ITriggers, _IState, 'formP
         this.opts.trigger('dynamicForm', 'dropField', textInputName);
     } 
     private handleAddRow(rowConfig: {
-        textInitialValue: string;
         selectorOpt: Array<{text:string, value: string}>;
-        selectedInitialValue: string;
     }) {
         const selectorsValues = this.getSelecorsValues();
         const availableOptions = this.options.filter(o => {
@@ -74,14 +72,14 @@ export class FormPageControllerScript extends Script<_ITriggers, _IState, 'formP
         this.opts.trigger('dynamicForm', 'addField', {
             'name': `row_text_${this.nexRowIndex}`,
             validators: [],
-            'initialValue': rowConfig.textInitialValue,
+            'initialValue': '',
         })
         this.opts.trigger('dynamicForm', 'addField', {
             sync: true,
             'name': `row_selector_${this.nexRowIndex}`,
             validators: [],
             meta: availableOptions,
-            'initialValue': rowConfig.selectedInitialValue,
+            'initialValue': availableOptions[0].value,
         })
         this.nexRowIndex +=1;
     }
@@ -92,8 +90,6 @@ export class FormPageControllerScript extends Script<_ITriggers, _IState, 'formP
         })
         this.handleAddRow({
             'selectorOpt': this.options,
-            'selectedInitialValue': 'Goldfish',
-            'textInitialValue': ''
         })
         this.setRows()
     }
@@ -107,8 +103,6 @@ export class FormPageControllerScript extends Script<_ITriggers, _IState, 'formP
         if(addFormRowEvent.isCatched) {
             this.handleAddRow({
                 'selectorOpt': this.options,
-                'selectedInitialValue': 'Goldfish',
-                'textInitialValue': ''
             })
             this.setRows();
         }

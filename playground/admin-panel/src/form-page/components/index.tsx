@@ -23,14 +23,18 @@ export const FormPage = () => {
   return (
     <div>
         <div>Form page</div>
-        <Button onClick={() => trigger('formPageController', 'addFormRow', null)}>Добавить</Button>
+        <Button m='20px' 
+                onClick={() => trigger('formPageController', 'addFormRow', null)}
+            >
+            Добавить
+        </Button>
         <div className='dynamic-form'>
         {rows.map( (r, i) => 
         (<div className='dynamic-form-row'    key={r.name}>
             <div className='dynamic-form-row-item'>
             <Select 
             opts={fieldsObject[`row_selector_${r.name}`].meta}
-            defaultValue={fieldsObject[`row_selector_${r.name}`].value}
+            value={fieldsObject[`row_selector_${r.name}`].value}
             onChange={(val) => trigger('dynamicForm', 'typeField', {
                 fieldName: `row_selector_${r.name}`,
                 'value': val
@@ -48,7 +52,8 @@ export const FormPage = () => {
             </div>
             <div className='dynamic-form-row-item'>
             {r.isRemovable ? 
-                <Trash color={'error'} onClick={() => trigger('formPageController', 'deleteFormRow', {
+                <Trash color={'error'} 
+                    onClick={() => trigger('formPageController', 'deleteFormRow', {
                     name: r.name
                 })}/>
             :null}
