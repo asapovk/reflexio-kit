@@ -104,6 +104,10 @@ export class FormsScript<RT, RS> {
         };
       const disabled = this.isSubmitDisabled(this.formActualState, this.touched);
       this.formActualState.isSubmitDisabled = disabled;
+      this.opts.setStatus(
+        'setFormState',
+        JSON.parse(JSON.stringify(this.formActualState))
+      );
     }
     if(args.status === 'dropField') {
       const fieldName = args.payload;

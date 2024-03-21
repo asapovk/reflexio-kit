@@ -9,7 +9,7 @@ import { Bucket } from "../../../../__shared/_ui/Svg/Filled/Bucket";
 import { Text } from "../../../../__shared/_ui/Text";
 import { ChatIcon } from "../../../../__shared/_ui/Svg/Filled/CartIcon";
 
-export const Sidebar = () => {
+export const Sidebar = (props: {clickUsers: () => void, clickGroups: () => void}) => {
     return (
  
             <Block>
@@ -25,14 +25,16 @@ export const Sidebar = () => {
               >
                 <Flexbox column>
                   <Button
-                    //onClick={() => setOpen(true)}
+                    onClick={() => props.clickUsers()}
                     m={'2rem'}
                     decoration='text'
                   >
                     <FileIcon size='xl' />
                     <Text size='s'>Users</Text>
                   </Button>
-                  <Button m={'2rem'} decoration='text'>
+                  <Button 
+                  onClick={() => props.clickGroups()}
+                  m={'2rem'} decoration='text'>
                     <Bucket size='xl' />
                     <Text size='s'>Groups</Text>
                   </Button>

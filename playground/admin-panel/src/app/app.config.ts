@@ -29,6 +29,7 @@ export type IAppState = {
     page: {
       users?: boolean;
       groups?: boolean;
+      formPage?: boolean;
     };
     dialog?: {
       createUser?: boolean;

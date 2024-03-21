@@ -27,6 +27,11 @@ const routes = [
             userProfileStages.LOAD_USERS(), 
             userProfileStages.PAGE_USERS()]
     },
+    {
+        route: '/form-page',
+        stages: [
+            userProfileStages.FORM_PAGE(),] 
+    },
 ]
 
 

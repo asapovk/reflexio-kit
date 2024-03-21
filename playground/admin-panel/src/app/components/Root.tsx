@@ -6,6 +6,7 @@ import { _IState, _ITriggers } from '../../_redux/types';
 import { UsersPage } from '../../users/components/UsersPage';
 import { Dialog } from './Dialog';
 import {Sidebar} from './Sidebar'
+import { FormPage } from '../../form-page/components';
 
 
 export const AppContainer = () => {
@@ -22,9 +23,13 @@ export const AppContainer = () => {
 
   return (
     <div>
-      <Sidebar/>
+      <Sidebar
+      clickUsers={()=> trigger('router', 'goTo', '/users')}
+      clickGroups={()=> trigger('router', 'goTo', '/form-page')}
+      />
       <div className='page-container'>
       {currentPage.users ? <UsersPage /> : null}
+      {currentPage.formPage ? <FormPage /> : null}
       </div>
       <Dialog/>
     </div>

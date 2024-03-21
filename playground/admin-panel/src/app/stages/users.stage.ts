@@ -4,6 +4,20 @@ import { _IState, _ITriggers } from '../../_redux/types';
 export type OPTS = Opts<_ITriggers, _IState>
 
 export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
+  FORM_PAGE: () => ({
+    name: 'FORM_PAGE',
+    'assemble': (opt) => {
+      opt.trigger('formPageController', 'init', null )
+      opt.trigger('appController', 'setPage', {
+        'formPage': true,
+      })
+    },
+    'disassemble': (opt) => {
+      opt.trigger('appController', 'setPage', {
+        'formPage': false,
+      })
+    }
+  }),
   LOAD_USERS: (params?: Array<number>) => ({
     name: 'LOAD_USERS',
     validator: (opt) => {
@@ -23,6 +37,11 @@ export const userProfileStages: {[key: string]: (p?: any) => Stage<OPTS>} = {
             'users': true
           })
     },
+    disassemble: async (opt) => {
+      opt.trigger('appController', 'setPage', {
+        'users': false
+      })
+    }
   }),
   DIALOG_EDIT_USER: (params?: Array<number>) => ({
     name: 'DIALOG_EDIT_USER',
