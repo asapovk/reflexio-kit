@@ -9,6 +9,9 @@ export const makeFormReducer = (biteName: string) => ({
   setFieldError(state: { [biteName: string]: IFormState } & any, payload) {
     state[biteName].fields[payload.fieldName].error = payload.error;
   },
+  setFieldMeta(state: { [biteName: string]: IFormState } & any,payload) {
+     state[biteName].fields[payload.fieldName].meta = payload.meta
+  },
   //установить значение поля
   setFieldValue(state: { [biteName: string]: IFormState } & any, payload) {
     state[biteName].fields[payload.fieldName].value = payload.value;

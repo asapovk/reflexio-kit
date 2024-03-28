@@ -53,6 +53,29 @@ export class FormPageControllerScript extends Script<_ITriggers, _IState, 'formP
         return values
     }
 
+    private updateSelectorsMeta() {
+        const appState= this.opts.getCurrentState();
+        const fieldsObject = appState.formPage.dynamicForm.fields;
+        //console.log(fieldsObject);
+        const formFieldsNames = Object.keys(fieldsObject);
+        const selectorFields = formFieldsNames.filter( fn => fn.includes('row_selector_'));
+        const selectorsValues = this.getSelecorsValues();
+        const availableOptions = this.options.filter(o => {
+            return !selectorsValues.includes(o.value)
+        })
+     
+        for(const sf of selectorFields) {
+            const currVal = fieldsObject[sf].value;
+            const currOption = this.options.find(o => {
+                return o.value === currVal
+            })
+            this.opts.trigger('dynamicForm', 'updateFieldMeta', {
+                'fieldName': sf, 
+                'meta': [...availableOptions, currOption]
+            })
+        }  
+    }
+
     private handleDeleteRow(name: string) {
         const selectorName = `row_selector_${name}`;
         const textInputName = `row_text_${name}`;
@@ -94,6 +117,10 @@ export class FormPageControllerScript extends Script<_ITriggers, _IState, 'formP
         this.setRows()
     }
     watch(args: WatchArgsType<_ITriggers, "formPageController">): void {
+        const typeFormFieldEvent = this.opts.catchEvent('dynamicForm', 'typeField', args);
+        if(typeFormFieldEvent.isCatched) {
+            this.updateSelectorsMeta()
+        }
         const dropEvent = this.opts.catchStatus('drop', args);
         if(dropEvent.isCatched) {
             this.opts.trigger('dynamicForm', 'dropForm', null);
@@ -105,11 +132,13 @@ export class FormPageControllerScript extends Script<_ITriggers, _IState, 'formP
                 'selectorOpt': this.options,
             })
             this.setRows();
+            this.updateSelectorsMeta();
         }
         const deleteFormRowEvent = this.opts.catchStatus('deleteFormRow', args);
         if(deleteFormRowEvent.isCatched) {
             this.handleDeleteRow(deleteFormRowEvent.payload.name)
             this.setRows();
+            this.updateSelectorsMeta();
         }
         
     }   

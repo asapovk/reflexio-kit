@@ -120,6 +120,15 @@ export class FormsScript<RT, RS> {
         JSON.parse(JSON.stringify(this.formActualState))
       );
     }
+    if(args.status === 'updateFieldMeta') {
+      const meta = JSON.parse(JSON.stringify(args.payload.meta));
+      const fieldName = args.payload.fieldName;
+      this.formActualState.fields[fieldName].meta = meta;
+      this.opts.setStatus(
+        'setFieldMeta',
+        {meta: this.formActualState.fields[fieldName].meta, fieldName}
+      );
+    }
 
     const formState: IFormState =
       this.opts.getCurrentState()[this.sliceName][this.biteName];

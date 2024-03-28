@@ -42,7 +42,7 @@ export const formPageBite
 }, {
   script: FormPageControllerScript,
   'instance': 'stable',
-  'watchScope': ['formPageController'],
+  'watchScope': ['formPageController', {'dynamicForm': 'typeField'}],
   'initOn': 'init'
 })
 

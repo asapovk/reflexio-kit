@@ -18,7 +18,6 @@ export const FormPage = () => {
 
   const fieldsObject = appState.formPage.dynamicForm.fields;
   const rows = appState.formPage.formRows;
-  console.log('fieldsObject', fieldsObject);
 
   return (
     <div>
@@ -35,10 +34,11 @@ export const FormPage = () => {
             <Select 
             opts={fieldsObject[`row_selector_${r.name}`].meta}
             value={fieldsObject[`row_selector_${r.name}`].value}
-            onChange={(val) => trigger('dynamicForm', 'typeField', {
+            onChange={(val) => {trigger('dynamicForm', 'typeField', {
                 fieldName: `row_selector_${r.name}`,
                 'value': val
-            })}
+            });
+        }}
             />
             </div>
             <div className='dynamic-form-row-item'>
@@ -53,9 +53,9 @@ export const FormPage = () => {
             <div className='dynamic-form-row-item'>
             {r.isRemovable ? 
                 <Trash color={'error'} 
-                    onClick={() => trigger('formPageController', 'deleteFormRow', {
+                    onClick={() => {trigger('formPageController', 'deleteFormRow', {
                     name: r.name
-                })}/>
+                })}}/>
             :null}
             </div>
         </div>))}
