@@ -46,6 +46,7 @@ export class EventManagerScript  {
         return
     }
     if(this.forwardMap[eventName]) {
+        watchArgs.hangOn();
         const triggerAndStatus = this.forwardMap[eventName];
         const ownPayload = typeof triggerAndStatus.payload !== 'undefined';
         this.opts.trigger(triggerAndStatus.trigger, triggerAndStatus.status, ownPayload ? triggerAndStatus.payload : watchArgs.payload)
