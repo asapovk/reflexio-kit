@@ -114,7 +114,7 @@ export class StageProcessor<O> {
     while (this.stagesQueue.length) {
       const result: any = await this.processStage();
       if (result !== true) {
-        this.reset();
+        //this.reset();
         if(result.onFail) {
           await result.onFail(this.opts.opt);
         }
