@@ -167,7 +167,7 @@ export class RoutingScript {
     }
 
     const deleteNavigationBlockerEvent = this.opts.catchStatus(
-      'setNavigationBlocker',
+      'deleteNavigationBlocker',
       args
     );
     if (deleteNavigationBlockerEvent.isCatched) {
