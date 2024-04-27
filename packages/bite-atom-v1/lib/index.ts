@@ -13,7 +13,6 @@ export function biteAtom<Tg, St, K extends keyof Tg, RTg>(
 ) {
   return Bite<Tg, St, K, RTg>(
     {
-        ...props.api, 
         init: (state, payload) => {
             state[biteName] = props.initialState; 
         },
