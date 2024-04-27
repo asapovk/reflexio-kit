@@ -1,10 +1,13 @@
 import { Bite } from '@reflexio/core-v1';
-import { MakeBiteReducerType, UpdateOnType } from '@reflexio/core-v1/lib/types';
+import { UpdateOnType } from '@reflexio/core-v1/lib/types';
+
+
+
+
 
 export function biteAtom<Tg, St, K extends keyof Tg, RTg>(
   biteName: K,
   props: {
-    api: MakeBiteReducerType<Tg, RTg, St, K> extends {init: any, dropt: any} ? MakeBiteReducerType<Tg, RTg, St, K>: never;
     watchScope?: UpdateOnType<RTg>;
     script?: any;
     instance?: 'stable' | 'refreshing' | 'multiple';
