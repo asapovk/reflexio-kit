@@ -40,8 +40,8 @@ export function biteAtom<Tg, St, K extends keyof Tg, RTg>(
       script: props.script || DefaultAtomScript,
       initOn: 'init' as any,
       addOpts: !props.script ? {
-          watch: props.script.watch,
-          init: props.script.init 
+          watch: props.watch,
+          init: props.init 
       }: undefined,
     }  as any
   );
