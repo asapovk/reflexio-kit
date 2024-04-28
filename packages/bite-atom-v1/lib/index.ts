@@ -1,5 +1,6 @@
 import { Bite } from '@reflexio/core-v1';
-import { MakeBiteReducerType, UpdateOnType } from '@reflexio/core-v1/lib/types';
+import { DefautOpts, MakeBiteReducerType, UpdateOnType, WatchArgsType } from '@reflexio/core-v1/lib/types';
+import { DefaultAtomScript } from './Script';
 
 
 
@@ -10,6 +11,8 @@ export function biteAtom<Tg, St, K extends keyof Tg, RTg>(
   props: {
     watchScope?: UpdateOnType<RTg>;
     script?: any;
+    init?: (opt: DefautOpts<RTg, St, K extends keyof RTg ? K : any, null>, initPayload: unknown) => Promise<void> | void;
+    watch?: (opt: DefautOpts<RTg, St, K extends keyof RTg ? K : any, null>, watchArgs: WatchArgsType<Tg, K>) => Promise<void> | void;
     reducers?:Partial<MakeBiteReducerType<Tg, RTg, St, K>>
     instance?: 'stable' | 'refreshing' | 'multiple';
     initialState?: K extends keyof St ? St[K] : never;
@@ -34,8 +37,12 @@ export function biteAtom<Tg, St, K extends keyof Tg, RTg>(
     {
       watchScope: props.watchScope || [biteName as any],
       instance: props.instance || 'stable',
-      script: props.script,
+      script: props.script || DefaultAtomScript,
       initOn: 'init' as any,
-    }
+      addOpts: !props.script ? {
+          watch: props.script.watch,
+          init: props.script.init 
+      }: undefined,
+    }  as any
   );
 }
