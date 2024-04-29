@@ -8,7 +8,7 @@ import { DefaultAtomScript } from './Script';
 
 export function biteAtom<Tg, St, K extends keyof Tg, RTg>(
   biteName: K,
-  props: {
+  props?: {
     watchScope?: UpdateOnType<RTg>;
     script?: any;
     init?: (opt: DefautOpts<RTg, St, K extends keyof RTg ? K : any, null>, initPayload: unknown) => Promise<void> | void;
@@ -21,7 +21,9 @@ export function biteAtom<Tg, St, K extends keyof Tg, RTg>(
   return Bite<Tg, St, K, RTg>(
     {
         init: (state, payload) => {
+          if(typeof props?.initialState !== 'undefined') {
             state[biteName] = props.initialState; 
+          }
         },
         drop: (state, payload) => {
             state[biteName] = null;
@@ -32,17 +34,17 @@ export function biteAtom<Tg, St, K extends keyof Tg, RTg>(
         mergeToState: (state, payload) => {
             Object.assign(state[biteName], payload);
         },
-        ...props.reducers
+        ...(props?.reducers ? props.reducers : {})
     } as any,
     {
       watchScope: props.watchScope || [biteName as any],
       instance: props.instance || 'stable',
       script: props.script || DefaultAtomScript,
       initOn: 'init' as any,
-      addOpts: !props.script ? {
+      addOpts: {
           watch: props.watch,
           init: props.init 
-      }: undefined,
+      },
     }  as any
   );
 }
