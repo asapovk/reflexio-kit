@@ -9,6 +9,12 @@ export type IEventManagerTriggers<Tr, St> = {
         to: Partial<Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>>;
         payload?: any;
     }
+    connectBite: {
+        from: Partial<Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>>; 
+        to: Partial<Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>>
+    };
+    clear: null;
+    clearConnect: null;
     mute: Partial<Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>>;
     unbind: Partial<Record<keyof Tr, TriggerPhaseKeys<Tr, keyof Tr>>>;
 }
