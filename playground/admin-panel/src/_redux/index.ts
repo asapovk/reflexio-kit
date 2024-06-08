@@ -4,6 +4,7 @@ import { loadUsers } from '../_utils/loadUsers.dev';
 import { usersSlice } from '../users/users.config';
 import { eventManagerSlice } from '../app/event-manager.comfig';
 import { formPageSlice } from '../form-page/form-page.slice';
+import { gridSlice } from '../grid/grid.slice';
 
 usersSlice.inject({
   loadUsers: loadUsers
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   ...appSlice.reducer,
   ...usersSlice.reducer,
   ...formPageSlice.reducer,
+  ...gridSlice.reducer,
 });
 
 
@@ -23,6 +25,7 @@ function configureStore() {
     appSlice.middleware,
     usersSlice.middleware,
     formPageSlice.middleware,
+    gridSlice.middleware,
   ];
 
   const store = createStore(
