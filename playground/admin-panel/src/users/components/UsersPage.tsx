@@ -62,9 +62,11 @@ export const UsersPage = () => {
   const trigger = useTrigger<_ITriggers>('UsersPage');
   const appState = useReflector<_ITriggers, _IState, _IState>(
     (state) => state,
-    ['appController']
+    ['usersComponent']
   );
+
   const list = appState.users.usersComponent.usersList;
+  console.log('render');
   return (<div>
           <div className='users-page-header'>
             <Button onClick={() => trigger('router', 'goTo', `/users/create`)}>Создать</Button>

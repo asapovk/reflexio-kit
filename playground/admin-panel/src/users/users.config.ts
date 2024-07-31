@@ -8,7 +8,7 @@ import {AsyncState, AsyncTrigger} from '@reflexio/bite-async-v1/lib/types' //'..
 import { biteForms } from '@reflexio/bite-forms-v1';
 import {IFormBiteTriggers, IFieldState, IFormState} from '@reflexio/bite-forms-v1/lib/types'
 import {biteLightController} from '@reflexio/bite-light-controller-v1'
-import {biteDerivatives} from '@reflexio/bite-derivatives-v1'
+import {biteDerivatives} from '../../../../packages/bite-derivatives-v1/lib/index'
 
 //import { biteStaging } from '../../../../packages/bite-staging-v1/lib/index';
 
@@ -53,12 +53,12 @@ export type IUsersTriggers = {
     setIsReady: boolean;
     openCreateUserForm: null;
   }>;
-  // usersComponent: BiteStatusWrap<{
-  //   init: null;
-  //   drop: null;
-  //   usersList: Array<IUserRow>,
-  //   usersCount: number
-  // }>;
+  usersComponent: BiteStatusWrap<{
+    init: null;
+    drop: null;
+    usersList: Array<IUserRow>,
+    usersCount: number
+  }>;
   loadUsers: BiteStatusWrap<AsyncTrigger<null, Array<any>>>
   createUserForm: BiteStatusWrap<IFormBiteTriggers>
 }
@@ -66,22 +66,24 @@ export type IUsersTriggers = {
 
 //form1 => form 2 form 3 onFail => back
 
+const biteUseComponent = biteDerivatives<IUsersTriggers, _IState, 'usersComponent', _ITriggers>('usersComponent', {
+  computers: {
+    'usersList':  (state: _IState) => state.users.loadUsers?.data || [],
+    'usersCount': (state: _IState) => state.users.usersComponent.usersList.length
+  },
+  watchScope: ['loadUsers'],
+  comparators: {
+    'usersCount': (prev, next) => true,
+    'usersList': (prev, next) => true,
+  }})
+
+
 export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState>('users', {
-  // usersComponent: biteDerivatives('usersComponent', {
-  //   computers: {
-  //     'usersList':  (state: _IState)=> state.users.loadUsers?.data || [],
-  //     'usersCount': (state: _IState)=> state.users.usersComponent.usersList.length
-  //   },
-  //   watchScope: ['loadUsers'],
-  //   // comparators: {
-  //   //    'usersCount': (prev, next) => false,
-  //   //    'usersList': (prev, next) => false,
-  //   //  }
-  // }),
+  usersComponent: biteUseComponent as any,
   usersController: biteLightController('usersController', {
     reducer: {
       setUsersList(state: IUsersState, payload){
-        state.usersComponent.usersList = payload;
+        //state.usersComponent.usersList = payload;
       },
       openCreateUserForm: null,
       setIsReady: null,
@@ -93,8 +95,9 @@ export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState
       },
     },
     script: {
-      watchScope: ['usersController'],
+      watchScope: [],
       watch: async (opt, pld) => {
+        console.log(pld.trigger, pld.status);
         const openCreateForm =  opt.catchStatus('openCreateUserForm', pld)
         if(openCreateForm.isCatched) {
           opt.trigger('createUserForm', 'init', {
@@ -114,8 +117,10 @@ export const usersSlice = Slice<IUsersTriggers, IUsersState, _ITriggers, _IState
         }
       },
       init: async (opts, pld) => {
+        opts.trigger('usersComponent', 'init', null);
         const res =  await opts.hook('loadUsers', 'init', 'done', null);
         if(res.data) {
+          console.log(res.data);
           opts.setStatus('setUsersList', res.data);
           opts.setStatus('setIsReady', true)
         }
