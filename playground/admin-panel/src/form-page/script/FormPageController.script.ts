@@ -1,4 +1,4 @@
-import { Script } from "@reflexio/core-v1/lib/interfaces/IScript";
+import { Script } from "@reflexio/core-v1/lib/Script";
 import { _IState, _ITriggers } from "../../_redux/types";
 import { ScriptOptsType, WatchArgsType } from "@reflexio/core-v1/lib/types";
 

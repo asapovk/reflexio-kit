@@ -1420,15 +1420,20 @@
   resolved "https://registry.npmjs.org/@reflexio/bite-staging-v1/-/bite-staging-v1-1.0.4-alpha.tgz#a0ad95d8409a4689ccd455fe64c86381ef0ae3db"
   integrity sha512-yO3x0Zr1cdkj9gcxcklByX9Hqj4u6Zcmbpm/VPkEoImscD500v1vXTBFJgtGQsQvuJFcWplUNqTX2S8EyPU7Iw==
 
-"@reflexio/core-v1@1.2.4":
-  version "1.2.4"
-  resolved "https://registry.npmjs.org/@reflexio/core-v1/-/core-v1-1.2.4.tgz#f728215ae1928dbadcc5b829bb78c89e23e821a8"
-  integrity sha512-RfuNDzrZjaiC3YFhrp0jKZoP0f4zqY5gUEYpmmU7UA+ouvo70qeCOgeqYfqw5fnAewJhjBy5v/EXmzzcJPD62g==
+"@reflexio/core-v1@^1.2.11", "@reflexio/core-v1@^1.2.5":
+  version "1.2.11"
+  resolved "https://registry.npmjs.org/@reflexio/core-v1/-/core-v1-1.2.11.tgz#d646891717859786355210048777af03af2bb9f6"
+  integrity sha512-dmLESD6oYPnLxGc2ik5mNjL/Rnr3Gg4W+ed9xJwT9KZgwrH/KQFnEU5ONsBD43ODUnfX9gsJcrW7vwQAbjCJkA==
+  dependencies:
+    uuid "^8.3.2"
 
-"@reflexio/react-v1@^1.1.4":
-  version "1.1.5"
-  resolved "https://registry.npmjs.org/@reflexio/react-v1/-/react-v1-1.1.5.tgz#2f0b408dd01f28477f6a75a3909c44b95f839c25"
-  integrity sha512-o/wlvUbPK/j1A4nwW4Ly4r6p30BRF0W3w5laMvQ/Vs9JeUVBhvrY/jNfTXM7frH05Lm6FDastUzBZewiuujEzg==
+"@reflexio/react-v1@^1.1.11":
+  version "1.1.11"
+  resolved "https://registry.npmjs.org/@reflexio/react-v1/-/react-v1-1.1.11.tgz#315785d0fe615a301e31d1e0c7983c3206783229"
+  integrity sha512-oBBdKWN0lktxUkxZTpC4/zqw0IfmcmvtznJNK/POqLlXB6ERG+hIvw5/t4ZyJmXyPOAYyq4IcoCfWr9WcaL9aw==
+  dependencies:
+    "@reflexio/core-v1" "^1.2.5"
+    "@types/react" "^18.2.73"
 
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
@@ -1891,6 +1896,14 @@
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^18.2.73":
+  version "18.3.3"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.3.3.tgz#9679020895318b0915d7a3ab004d92d33375c45f"
+  integrity sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==
+  dependencies:
+    "@types/prop-types" "*"
     csstype "^3.0.2"
 
 "@types/retry@0.12.0":
