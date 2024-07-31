@@ -19,7 +19,7 @@ export class FormsScript<RT, RS> {
   private formValidators: Array<Validator> = [];
   private isSubmitDisabled: (st: IFormState, touched: boolean) => boolean;
   private onSubmit: (st: IFormState, unTouch?: () => void) => void;
-  private onTouch: (st: IFormState) => void;
+  private onTouch: (st: IFormState, touched?: boolean) => void;
 
   private unTouch = () => {
     this.touched = false;
@@ -78,9 +78,9 @@ export class FormsScript<RT, RS> {
 
   private touch() {
     if (!this.touched) {
-      this.onTouch && this.onTouch(this.formActualState);
+      this.touched = true; 
     }
-    this.touched = true;
+    this.onTouch && this.onTouch(this.formActualState, this.touched);
   }
 
   public watch(args) {

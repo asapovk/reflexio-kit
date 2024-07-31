@@ -109,7 +109,11 @@ export class FormPageControllerScript extends Script<_ITriggers, _IState, 'formP
 
     init(args: null): void {
         this.opts.trigger('dynamicForm', 'init', {
-            'fieldsOpts': []
+            'fieldsOpts': [],
+            onTouch: (fs) => {
+                console.log('TOCUH');
+                console.log(fs);
+            }
         })
         this.handleAddRow({
             'selectorOpt': this.options,

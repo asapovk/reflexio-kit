@@ -30,7 +30,7 @@ const routes = [
     {
         route: '/form-page',
         stages: [
-            userProfileStages.FORM_PAGE(),] 
+            userProfileStages.FORM_PAGE()] 
     },
 ]
 

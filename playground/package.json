@@ -42,7 +42,7 @@
     "@reflexio/bite-atom-v1": "^1.0.7-alpha",
     "@reflexio/bite-derivatives-v1": "1.1.9-alpha",
     "@reflexio/bite-event-manager-v1": "1.0.2-alpha",
-    "@reflexio/bite-forms-v1": "^1.0.9-alpha",
+    "@reflexio/bite-forms-v1": "^1.0.10-alpha",
     "@reflexio/bite-light-controller-v1": "1.0.2-alpha",
     "@reflexio/bite-routing-v1": "1.0.3-alpha",
     "@reflexio/bite-staging-v1": "1.0.4-alpha",
